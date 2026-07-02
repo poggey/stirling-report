@@ -187,17 +187,6 @@ export function ReportSheet({ payload }: { payload: ReportPayload }) {
               ? "AI-generated · every figure from the day's snapshot"
               : "Deterministic template · no AI call"}
           </span>
-
-          {/* Finish-line chequer: strictly means "complete" — end of the report */}
-          <div
-            aria-hidden="true"
-            title="End of briefing"
-            className="mt-5 h-2 rounded-sm opacity-[0.16]"
-            style={{
-              background: "repeating-conic-gradient(#0C3B2A 0% 25%, transparent 0% 50%)",
-              backgroundSize: "12px 12px",
-            }}
-          />
         </div>
       </article>
     </>

@@ -47,23 +47,25 @@ export function WiresPanel({ headlines, mode }: WiresPanelProps) {
         <>
           {/* Every high-salience story leads — a second big story is never
               hidden behind the first */}
-          <ul className="border-b border-line pb-2">
+          <ul className="border-b border-line pb-2.5">
             {leaders.map((h, i) => (
-              <li key={h.link} className={i > 0 ? "mt-2 border-t border-[#EAEBDF] pt-2" : ""}>
+              <li key={h.link} className={i > 0 ? "mt-2.5 border-t border-[#EAEBDF] pt-2.5" : ""}>
                 <a
                   href={h.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-wrap items-baseline gap-x-3 gap-y-1"
+                  className="group block"
                 >
-                  <span className="caps shrink-0 !text-[9px] !font-bold !tracking-[0.16em] text-brass">
-                    Leading
+                  <span className="flex items-baseline justify-between gap-3">
+                    <span className="caps shrink-0 !text-[9px] !font-bold !tracking-[0.16em] text-brass">
+                      Leading
+                    </span>
+                    <span className="caps shrink-0 !text-[9px] text-muted">
+                      {h.source} · {timeOf(h.publishedAt)}
+                    </span>
                   </span>
-                  <span className="font-display text-[17.5px] leading-snug text-ink group-hover:text-brg-600">
+                  <span className="mt-1 block max-w-[75ch] font-display text-[17.5px] leading-snug text-ink group-hover:text-brg-600">
                     {h.title}
-                  </span>
-                  <span className="caps ml-auto shrink-0 !text-[9px] text-muted">
-                    {h.source} · {timeOf(h.publishedAt)}
                   </span>
                 </a>
               </li>

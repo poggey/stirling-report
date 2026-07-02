@@ -42,13 +42,14 @@ export function LedgerPanel({ instruments }: { instruments: MarketInstrument[] }
         <span className="caps text-cream/55">highest salience</span>
       </div>
 
+      <div className="flex flex-1 flex-col">
       {instruments.map((instrument) => {
         const change = formatChange(instrument);
         const hot = Math.abs(instrument.z) >= 2;
         return (
           <div
             key={instrument.id}
-            className="relative z-[2] border-b border-cream/10 py-3.5 last:border-b-0"
+            className="relative z-[2] flex flex-1 flex-col justify-center border-b border-cream/10 py-3.5 last:border-b-0"
           >
             {Math.abs(instrument.z) >= 2.5 && (
               <p className="mb-1 text-right font-display text-[11.5px] italic leading-none text-brass">
@@ -90,6 +91,7 @@ export function LedgerPanel({ instruments }: { instruments: MarketInstrument[] }
           </div>
         );
       })}
+      </div>
     </aside>
   );
 }

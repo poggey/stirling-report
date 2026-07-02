@@ -8,6 +8,8 @@ interface SparklineProps {
   width?: number;
   height?: number;
   className?: string;
+  /** Pass "none" to stretch the sparkline to its container width. */
+  preserveAspectRatio?: string;
 }
 
 /** 30-day inline-SVG sparkline. Decorative — data lives in the figures beside it. */
@@ -18,6 +20,7 @@ export function Sparkline({
   width = 96,
   height = 28,
   className,
+  preserveAspectRatio,
 }: SparklineProps) {
   if (points.length < 2) {
     return (
@@ -48,7 +51,14 @@ export function Sparkline({
     })
     .join(" ");
   return (
-    <svg width={width} height={height} aria-hidden="true" className={className}>
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio={preserveAspectRatio}
+      aria-hidden="true"
+      className={className}
+    >
       <polyline
         points={coords}
         fill="none"

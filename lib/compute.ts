@@ -37,7 +37,8 @@ export function dayChange(points: SeriesPoint[]): DayChange | null {
  * definition, unremarkable.
  */
 export function zScore(points: SeriesPoint[], mode: ChangeMode): number {
-  const changes = dailyChanges(points, mode);
+  // Always a trailing-30-day baseline, however long the series runs.
+  const changes = dailyChanges(points.slice(-31), mode);
   if (changes.length < 10) return 0;
   const latest = changes[changes.length - 1];
   const trailing = changes.slice(0, -1);

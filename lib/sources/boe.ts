@@ -46,6 +46,7 @@ const SERIES = [
   { code: "IUDBEDR", id: "bankrate", label: "Bank Rate" },
   { code: "IUDSNPY", id: "gilt5y", label: "UK 5y Gilt" },
   { code: "IUDMNPY", id: "gilt10y", label: "UK 10y Gilt" },
+  { code: "IUDLNPY", id: "gilt20y", label: "UK 20y Gilt" },
 ];
 
 function fmtIadbDate(d: Date): string {
@@ -64,7 +65,8 @@ export const boe: Provider = {
       source: SOURCE,
     }));
     try {
-      const from = fmtIadbDate(new Date(Date.now() - 60 * 86400_000));
+      // 400 days back so the curve card can draw a one-year-ago comparator.
+      const from = fmtIadbDate(new Date(Date.now() - 400 * 86400_000));
       const to = fmtIadbDate(new Date());
       const res = await cachedFetch(
         "https://www.bankofengland.co.uk/boeapps/iadb/fromshowcolumns.asp?csv.x=yes" +

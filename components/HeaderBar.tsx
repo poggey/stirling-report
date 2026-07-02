@@ -1,63 +1,73 @@
 import Link from "next/link";
 import { Medallion } from "./Medallion";
-import { formatUkDate } from "@/lib/format";
+import { formatShortDateTime } from "@/lib/format";
 
 const NAV = ["Today", "Archive", "Curve", "Diary", "Learn"] as const;
 
 interface HeaderBarProps {
   weather: string;
+  weatherSub: string;
   petals: number;
   date: Date;
 }
 
-export function HeaderBar({ weather, petals, date }: HeaderBarProps) {
+export function HeaderBar({ weather, weatherSub, petals, date }: HeaderBarProps) {
   return (
-    <header className="border-b border-line bg-ivory-0">
-      <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-x-6 gap-y-3 px-4 py-4 sm:px-6">
-        <h1 className="font-display text-2xl font-semibold tracking-tight text-brg">
-          Stirling<span className="text-brass">.</span>
-        </h1>
+    <header
+      className="sticky top-0 z-40 border-b border-line border-t-[3px] border-t-brg bg-ivory-0/90 backdrop-blur-[10px]"
+      style={{ boxShadow: "inset 0 1px 0 #A9853F" }}
+    >
+      <div className="mx-auto flex min-h-[66px] max-w-[1200px] flex-wrap items-center gap-x-6 gap-y-2 px-4 py-2 min-[960px]:py-0 sm:px-7 lg:gap-x-[34px]">
+        <p className="font-display text-2xl font-semibold tracking-[0.05em] text-brg">
+          Stirling<span className="not-italic text-brass">.</span>
+        </p>
 
-        <nav aria-label="Primary" className="order-last w-full sm:order-none sm:w-auto">
-          <ul className="flex gap-4 text-[11px] uppercase tracking-[0.12em]">
-            {NAV.map((item) => (
-              <li key={item}>
-                {item === "Today" ? (
-                  <Link
-                    href="/"
-                    aria-current="page"
-                    className="border-b-2 border-brass pb-0.5 font-medium text-brg"
-                  >
-                    {item}
-                  </Link>
-                ) : (
-                  <span className="cursor-default text-muted" title="Coming in a later phase">
-                    {item}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
+        <nav aria-label="Primary" className="hidden min-[960px]:flex min-[960px]:gap-[26px]">
+          {NAV.map((item) =>
+            item === "Today" ? (
+              <Link
+                key={item}
+                href="/"
+                aria-current="page"
+                className="caps border-b-2 border-brass py-1 !text-xs text-brg"
+              >
+                {item}
+              </Link>
+            ) : (
+              <span
+                key={item}
+                className="caps cursor-default border-b-2 border-transparent py-1 !text-xs text-muted"
+                title="Coming in a later phase"
+              >
+                {item}
+              </span>
+            ),
+          )}
         </nav>
 
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex flex-wrap items-center justify-end gap-3 sm:gap-4">
           <time
-            dateTime={date.toISOString().slice(0, 10)}
-            className="hidden text-sm text-muted md:block"
+            dateTime={date.toISOString()}
+            className="hidden text-xs font-medium text-muted min-[960px]:block"
           >
-            {formatUkDate(date)}
+            {formatShortDateTime(date)}
           </time>
 
-          <span className="flex items-center gap-1.5 rounded-full border border-line bg-ivory-1 py-1 pl-1.5 pr-3 text-sm text-ink">
-            <Medallion petals={petals} size={20} />
-            {weather}
+          <span className="flex items-center gap-2 rounded-full border border-line bg-ivory-1 py-1.5 pl-2 pr-3.5">
+            <Medallion petals={petals} size={22} />
+            <span className="leading-tight">
+              <span className="block text-[11px] font-bold tracking-[0.07em] text-brg">
+                {weather.toUpperCase()}
+              </span>
+              <span className="block text-[10px] text-muted">{weatherSub}</span>
+            </span>
           </span>
 
           <button
             type="button"
             disabled
             title="Phase 3"
-            className="rounded-[10px] bg-brg px-4 py-2 text-sm text-cream opacity-50"
+            className="whitespace-nowrap rounded-[10px] bg-brg px-3 py-[11px] text-[13px] font-semibold text-cream opacity-60 sm:px-5"
           >
             Issue today&rsquo;s report
           </button>

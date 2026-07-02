@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+build/
+
+# Environment files — keys must never be committed
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel/
+
+# Test coverage
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Logs
+npm-debug.log*
+
+# macOS
+.DS_Store

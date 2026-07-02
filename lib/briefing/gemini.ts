@@ -71,7 +71,14 @@ async function callGemini(
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: system }] },
           contents: [{ role: "user", parts: [{ text: user }] }],
-          generationConfig: { temperature: 0.4, maxOutputTokens: 1024 },
+          generationConfig: {
+            temperature: 0.4,
+            // 2.5-series models spend "thinking" tokens from the same output
+            // budget — zero it (a briefing needs prose, not reasoning) and
+            // leave ample room so tones never truncate mid-sentence.
+            maxOutputTokens: 4096,
+            thinkingConfig: { thinkingBudget: 0 },
+          },
         }),
         cache: "no-store",
       },
@@ -102,7 +109,9 @@ export async function buildBriefings(edition: Edition): Promise<Briefings> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return briefings;
 
-  const model = process.env.GEMINI_MODEL ?? "gemini-2.0-flash";
+  // gemini-2.0-flash 429s on the current free tier; 2.5-flash is the
+  // free-quota model as of Jul 2026. Override with GEMINI_MODEL if it moves.
+  const model = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
   const context = `Context JSON for ${edition.date}:\n${contextFor(edition)}`;
 
   for (const tone of TONES) {

@@ -76,6 +76,8 @@ export function LedgerPanel({ instruments }: { instruments: MarketInstrument[] }
               width={72}
               height={24}
               className={hot ? "opacity-95" : "opacity-80"}
+              precision={instrument.precision}
+              isRate={instrument.class === "rate"}
             />
             <p className={`figures min-w-[72px] text-right text-[13px] font-bold ${CHANGE_TONE[change.tone]}`}>
               <span aria-hidden="true">{change.glyph}</span>

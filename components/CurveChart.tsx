@@ -1,3 +1,4 @@
+import { CurveScrub, type CurveKnot } from "./CurveScrub";
 import type { MarketInstrument } from "@/lib/market-data";
 import type { SeriesPoint } from "@/lib/sources/types";
 
@@ -89,6 +90,17 @@ export function CurveChart({ title, sourceNote, tenors, fetchedAt, footnote }: C
   const todayCoords = coords(today);
   const stale = live.some((t) => t.instrument.health.status !== "ok");
 
+  const knots: CurveKnot[] = live.map((t, i) => ({
+    tenor: t.tenor,
+    x: todayCoords[i][0],
+    y: todayCoords[i][1],
+    lines: [
+      { label: "Today", value: today[i] },
+      ...(hasMonth ? [{ label: "1m ago", value: monthAgo[i]! }] : []),
+      ...(hasYear ? [{ label: "1y ago", value: yearAgo[i]! }] : []),
+    ],
+  }));
+
   return (
     <section
       aria-label={title}
@@ -176,6 +188,8 @@ export function CurveChart({ title, sourceNote, tenors, fetchedAt, footnote }: C
             </text>
           </g>
         ))}
+
+        <CurveScrub knots={knots} width={W} height={H} baseY={BASE_Y} />
       </svg>
 
       <div className="mt-2 flex gap-[18px] text-[11.5px] text-muted">

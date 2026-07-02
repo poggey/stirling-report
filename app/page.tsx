@@ -46,9 +46,11 @@ export default async function Home() {
   const ranked = rankBySalience(withData.filter((i) => !OFF_BOARD.has(i.id)));
   const ledger = ranked.slice(0, 4);
   const ledgerIds = new Set(ledger.map((i) => i.id));
-  const board = instruments.filter(
-    (i) => !ledgerIds.has(i.id) && !OFF_BOARD.has(i.id),
-  );
+  // StatRow is a client component (watchlist) — trim history to the 30
+  // sparkline points so long rate series never ship to the browser.
+  const board = instruments
+    .filter((i) => !ledgerIds.has(i.id) && !OFF_BOARD.has(i.id))
+    .map((i) => ({ ...i, points: i.points.slice(-30) }));
 
   // Once the evening snapshot locks the day, its story (with the AI's
   // news-aware headline) leads; before that the live deterministic one does.

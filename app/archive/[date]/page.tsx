@@ -51,9 +51,10 @@ export default async function ReplayPage({ params }: Params) {
     .filter((i) => i.id !== "gilt20y");
   const ledger = ranked.slice(0, 4);
   const ledgerIds = new Set(ledger.map((i) => i.id));
-  const board = edition.instruments.filter(
-    (i) => !ledgerIds.has(i.id) && i.id !== "gilt20y",
-  );
+  // StatRow is a client component — trim history to the sparkline window.
+  const board = edition.instruments
+    .filter((i) => !ledgerIds.has(i.id) && i.id !== "gilt20y")
+    .map((i) => ({ ...i, points: i.points.slice(-30) }));
   const gilt5y = byId.get("gilt5y");
   const gilt10y = byId.get("gilt10y");
   const gilt20y = byId.get("gilt20y");

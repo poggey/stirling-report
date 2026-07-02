@@ -1,3 +1,4 @@
+import { CurveScrub, type CurveKnot } from "./CurveScrub";
 import type { MarketInstrument } from "@/lib/market-data";
 import type { SeriesPoint } from "@/lib/sources/types";
 
@@ -97,6 +98,17 @@ export function GiltCurveCard({ gilt5y, gilt10y, gilt20y, fetchedAt }: GiltCurve
   const todayCoords = coordsFor(today);
   const annotationColour = change10yBp >= 0 ? "#BC4B32" : "#177A4E";
 
+  const knots: CurveKnot[] = TENORS.map((tenor, i) => ({
+    tenor,
+    x: todayCoords[i][0],
+    y: todayCoords[i][1],
+    lines: [
+      { label: "Today", value: today[i] },
+      ...(hasMonth ? [{ label: "1m ago", value: (monthAgo as number[])[i] }] : []),
+      ...(hasYear ? [{ label: "1y ago", value: (yearAgo as number[])[i] }] : []),
+    ],
+  }));
+
   return (
     <section
       aria-label="UK gilt curve against one month and one year ago"
@@ -180,6 +192,8 @@ export function GiltCurveCard({ gilt5y, gilt10y, gilt20y, fetchedAt }: GiltCurve
             </text>
           ))}
         </g>
+
+        <CurveScrub knots={knots} width={W} height={H} baseY={BASE_Y} />
       </svg>
 
       <div className="mt-2.5 flex gap-[18px] text-[11.5px] text-muted">

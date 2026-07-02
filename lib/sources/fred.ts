@@ -26,7 +26,7 @@ const SERIES = [
   { seriesId: "DGS5", id: "ust5y", label: "US 5y Treasury", fixture: dgs5Fixture },
   { seriesId: "DGS10", id: "ust10y", label: "US 10y Treasury", fixture: dgs10Fixture },
   { seriesId: "DGS30", id: "ust30y", label: "US 30y Treasury", fixture: dgs30Fixture },
-  { seriesId: "DFEDTARU", id: "fedtarget", label: "Fed Funds Target (upper)", fixture: dfedtaruFixture },
+  { seriesId: "DFEDTARU", id: "fedtarget", label: "US Fed Funds Target (upper)", fixture: dfedtaruFixture },
 ];
 
 export const fred: Provider = {

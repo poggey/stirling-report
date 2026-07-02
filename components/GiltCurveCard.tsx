@@ -56,7 +56,7 @@ export function GiltCurveCard({ gilt5y, gilt10y, gilt20y, fetchedAt }: GiltCurve
       <section className="rounded-card border border-line bg-ivory-1 p-6 shadow-card sm:px-7">
         <div className="flex items-baseline justify-between">
           <h3 className="coachline-under font-display text-[19px] font-[540] text-ink">
-            The gilt curve
+            The UK gilt curve
           </h3>
           <span className="caps text-muted !font-medium">Bank of England IADB</span>
         </div>
@@ -104,7 +104,7 @@ export function GiltCurveCard({ gilt5y, gilt10y, gilt20y, fetchedAt }: GiltCurve
     >
       <div className="mb-4 flex items-baseline justify-between">
         <h3 className="coachline-under font-display text-[19px] font-[540] text-ink">
-          The gilt curve
+          The UK gilt curve
         </h3>
         <span className="caps !font-medium text-muted">Bank of England IADB</span>
       </div>

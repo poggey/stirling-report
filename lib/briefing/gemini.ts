@@ -37,7 +37,7 @@ Hard rules:
 
 const HEADLINE_INSTRUCTION = `Before the briefing, output exactly one line in the form:
 HEADLINE: <a newspaper headline of at most 12 words>
-It must lead with the top-ranked instrument's move and may attribute it, hedged, to a wire headline (e.g. "Oil surges as Gulf conflict reports rattle markets"). Name no event absent from the wires. Then a blank line, then the briefing.`;
+It must lead with the top-ranked instrument's move. Attribute the move to a wire headline ONLY when that event has a direct, economically plausible link to that specific instrument (a Gulf conflict explains oil; a bank enforcement notice does not explain the yen). When no wire plausibly explains the move, write a purely factual headline about the move itself — do not force a connection. Name no event absent from the wires. Then a blank line, then the briefing.`;
 
 function contextFor(edition: Edition): string {
   // Compact context: the ranking plus the numbers the model may cite.

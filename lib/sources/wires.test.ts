@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { parseRss, scoreHeadline } from "./wires";
+import { parseRss, scoreHeadline, splitWires, type Headline } from "./wires";
 
 const xml = readFileSync(
   path.join(__dirname, "__fixtures__", "bbc-business.rss.xml"),
@@ -70,5 +70,55 @@ describe("scoreHeadline", () => {
     const macro = scoreHeadline("Inflation surprise reshapes rate bets", "BBC Business", at(2), now);
     const plain = scoreHeadline("Village fete raises record sum", "BBC Business", at(2), now);
     expect(macro).toBeGreaterThan(plain);
+  });
+
+  it("matches whole words only — 'warns' is not 'war', 'pirate' is not 'rate'", () => {
+    const warns = scoreHeadline("Airline warns of queue delays", "BBC Business", at(0), now);
+    const pirate = scoreHeadline("Pirate festival returns to Cornwall", "BBC World", at(0), now);
+    const war = scoreHeadline("War fears deepen in the region", "BBC World", at(0), now);
+    expect(warns).toBe(1);
+    expect(pirate).toBe(1);
+    expect(war).toBe(3);
+  });
+});
+
+describe("splitWires", () => {
+  const wire = (title: string, score: number, hoursAgo: number): Headline => ({
+    title,
+    link: `https://example.org/${title.replaceAll(" ", "-")}`,
+    source: "BBC World",
+    publishedAt: new Date(Date.parse("2026-07-02T20:00:00Z") - hoursAgo * 3_600_000).toISOString(),
+    score,
+  });
+
+  it("surfaces every big story as a leader, not just the top one", () => {
+    const { leaders } = splitWires([
+      wire("US strikes Iran", 2.9, 3),
+      wire("Markets crash on escalation", 2.4, 1),
+      wire("Pub hours extended", 0.9, 0),
+    ]);
+    expect(leaders.map((h) => h.title)).toEqual([
+      "US strikes Iran",
+      "Markets crash on escalation",
+    ]);
+  });
+
+  it("always keeps at least one leader on a quiet day", () => {
+    const { leaders, latest } = splitWires([
+      wire("Quiet story A", 0.8, 1),
+      wire("Quiet story B", 0.6, 0),
+    ]);
+    expect(leaders).toHaveLength(1);
+    expect(leaders[0].title).toBe("Quiet story A");
+    expect(latest.map((h) => h.title)).toEqual(["Quiet story B"]);
+  });
+
+  it("runs the remainder newest-first", () => {
+    const { latest } = splitWires([
+      wire("Big story", 2.0, 5),
+      wire("Older item", 0.5, 4),
+      wire("Newer item", 0.4, 1),
+    ]);
+    expect(latest.map((h) => h.title)).toEqual(["Newer item", "Older item"]);
   });
 });

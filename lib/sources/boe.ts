@@ -43,7 +43,7 @@ export function parseBoE(csv: string): Record<string, SeriesPoint[]> {
 // No 2y par-yield quick code exists in IADB (see NOTES.md) — the short gilt
 // tenor is the 5y nominal par yield, labelled honestly throughout the UI.
 const SERIES = [
-  { code: "IUDBEDR", id: "bankrate", label: "Bank Rate" },
+  { code: "IUDBEDR", id: "bankrate", label: "UK Bank Rate" },
   { code: "IUDSNPY", id: "gilt5y", label: "UK 5y Gilt" },
   { code: "IUDMNPY", id: "gilt10y", label: "UK 10y Gilt" },
   { code: "IUDLNPY", id: "gilt20y", label: "UK 20y Gilt" },

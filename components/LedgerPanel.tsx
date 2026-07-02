@@ -48,13 +48,14 @@ export function LedgerPanel({ instruments }: { instruments: MarketInstrument[] }
         return (
           <div
             key={instrument.id}
-            className="relative z-[2] flex items-center gap-3.5 border-b border-cream/10 py-3.5 last:border-b-0"
+            className="relative z-[2] border-b border-cream/10 py-3.5 last:border-b-0"
           >
             {Math.abs(instrument.z) >= 2.5 && (
-              <span className="absolute -top-1.5 right-0 font-display text-[11.5px] italic text-brass">
+              <p className="mb-1 text-right font-display text-[11.5px] italic leading-none text-brass">
                 {Math.abs(instrument.z).toFixed(1)}σ day against its month
-              </span>
+              </p>
             )}
+            <div className="flex items-center gap-3.5">
             <div className="min-w-0 flex-1">
               <p className="caps truncate text-cream/60">{instrument.label}</p>
               <p className={`figures mt-px text-xl ${hot ? "font-bold" : "font-semibold"}`}>
@@ -83,6 +84,7 @@ export function LedgerPanel({ instruments }: { instruments: MarketInstrument[] }
               </span>{" "}
               {change.text}
             </p>
+            </div>
           </div>
         );
       })}

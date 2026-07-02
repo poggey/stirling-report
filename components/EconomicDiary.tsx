@@ -54,13 +54,13 @@ export function EconomicDiary({ today, limit }: { today: string; limit?: number 
         </Link>
       </div>
 
-      <table className="w-full border-collapse">
+      <table className="w-full border-collapse font-narrow">
         <thead>
           <tr>
-            {["Date", "Release", "Result"].map((h, i) => (
+            {(["Date", "Release", "Prior", "Exp.", "Result"] as const).map((h, i) => (
               <th
                 key={h}
-                className={`caps border-b border-line pb-2 !text-[9.5px] !font-bold text-muted ${i === 2 ? "text-right" : "text-left"}`}
+                className={`caps border-b border-line pb-2 !text-[9.5px] !font-bold text-muted ${i >= 2 ? "text-right" : "text-left"}`}
               >
                 {h}
               </th>
@@ -76,11 +76,20 @@ export function EconomicDiary({ today, limit }: { today: string; limit?: number 
                   month: "short",
                 })}
               </td>
-              <td className="py-3 pr-2 text-[13.5px]">
+              <td className="py-3 pr-3 text-[13.5px]">
                 <span className="caps mr-2 !text-[9px] !font-bold text-brass">{entry.economy}</span>
                 {entry.name}
               </td>
-              <td className="py-3 text-right">
+              <td className="figures py-3 pl-2 text-right text-[13px] text-muted">
+                {entry.prior ?? "—"}
+              </td>
+              <td
+                className="figures py-3 pl-2 text-right text-[13px] text-muted"
+                title={entry.expected ? undefined : "Consensus is commercial data — shown only when publicly citable"}
+              >
+                {entry.expected ?? "—"}
+              </td>
+              <td className="py-3 pl-3 text-right">
                 <Pill entry={entry} today={today} />
               </td>
             </tr>
@@ -90,8 +99,9 @@ export function EconomicDiary({ today, limit }: { today: string; limit?: number 
 
       <p className="mt-3.5 border-t border-line pt-2.5 text-[11px] leading-relaxed text-muted">
         Schedule curated {SCHEDULE_CURATED_AT} from ONS, BLS and central-bank
-        calendars. Consensus expectations are commercial data — omitted;
-        surprise direction scores against the prior print.{" "}
+        calendars; priors from the official releases. Consensus (Exp.) is
+        commercial data — shown only when publicly citable, else surprise
+        direction scores against the prior print.{" "}
         {anySurprise
           ? `Surprise readings — UK ${surprises[0] ?? "–"} · US ${surprises[1] ?? "–"} · EA ${surprises[2] ?? "–"}.`
           : "The surprise index begins once releases print against recorded priors."}

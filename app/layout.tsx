@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   title: "Stirling — The Daily Economic Intelligence Terminal",
   description:
     "A free, automated daily economic briefing: markets, macro and the story of the day, issued as one immutable edition every evening.",
+  openGraph: {
+    title: "Stirling — The Daily Economic Intelligence Terminal",
+    images: ["/api/og/latest"],
+  },
 };
 
 export default function RootLayout({

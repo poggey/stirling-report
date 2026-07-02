@@ -1,13 +1,25 @@
+import Link from "next/link";
+import { WeatherTile } from "./WeatherTile";
+import type { EditionSummary } from "@/lib/editions/summaries";
+import { ukDateOf } from "@/lib/editions/types";
+
 /**
- * The archive holds one tile per issued edition. Editions begin accumulating
- * when the Phase 2 snapshot cron ships — today there is exactly one, so the
- * strip shows it honestly beside the empty run it will grow into.
+ * The last 30 sessions as weather-tinted tiles. Days without an edition
+ * render as dashed empty slots — the archive only ever grows.
  */
-export function ArchiveStrip({ edition, date }: { edition: number; date: Date }) {
+export function ArchiveStrip({
+  summaries,
+  date,
+}: {
+  summaries: EditionSummary[];
+  date: Date;
+}) {
+  const byDate = new Map(summaries.map((s) => [s.date, s]));
+  const today = ukDateOf(date);
   const days = Array.from({ length: 30 }, (_, i) => {
     const d = new Date(date);
     d.setDate(d.getDate() - (29 - i));
-    return d;
+    return ukDateOf(d);
   });
 
   return (
@@ -20,30 +32,25 @@ export function ArchiveStrip({ edition, date }: { edition: number; date: Date })
           The archive
         </h3>
         <span className="caps !font-medium text-muted">
-          editions accumulate from Phase 2 · <span className="text-brg">⚑ play week — Phase 4</span>
+          last 30 sessions · click to replay ·{" "}
+          <Link href="/archive" className="font-bold text-brg hover:text-brg-600">
+            ⚑ full archive
+          </Link>
         </span>
       </div>
       <div className="flex gap-[9px] overflow-x-auto px-0.5 pb-0.5 pt-1.5">
-        {days.map((d, i) => {
-          const isToday = i === days.length - 1;
-          return (
+        {days.map((d) => {
+          const summary = byDate.get(d);
+          return summary ? (
+            <WeatherTile key={d} summary={summary} isToday={d === today} />
+          ) : (
             <div
-              key={d.toISOString()}
-              title={
-                isToday
-                  ? `Edition Nº ${edition} — today`
-                  : "No edition — archive begins with the Phase 2 snapshot cron"
-              }
-              className={`flex h-12 w-[42px] shrink-0 flex-col items-center justify-center gap-[3px] rounded-[10px] border ${
-                isToday
-                  ? "border-[1.5px] border-brass bg-[#E2EEE2]"
-                  : "border-dashed border-line bg-ivory-0"
-              }`}
+              key={d}
+              title="No edition for this date"
+              className="flex h-12 w-[42px] shrink-0 flex-col items-center justify-center rounded-[10px] border border-dashed border-line bg-ivory-0"
             >
-              <span
-                className={`figures text-[10px] font-bold ${isToday ? "text-ink/75" : "text-line"}`}
-              >
-                {d.getDate()}
+              <span className="figures text-[10px] font-bold text-line">
+                {Number(d.slice(8, 10))}
               </span>
             </div>
           );

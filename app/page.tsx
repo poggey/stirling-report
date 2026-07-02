@@ -17,6 +17,7 @@ import {
 } from "@/components/report/ReportSheet";
 import { templateBriefing } from "@/lib/briefing/template";
 import { getLatestEdition } from "@/lib/editions/store";
+import { getEditionSummaries } from "@/lib/editions/summaries";
 import { ukDateOf, type Edition } from "@/lib/editions/types";
 import { formatChange, formatUkDate } from "@/lib/format";
 import { getMarketData } from "@/lib/market-data";
@@ -32,9 +33,10 @@ export const revalidate = 1800;
 const CURVE_ONLY = new Set(["gilt20y"]);
 
 export default async function Home() {
-  const [{ instruments, fetchedAt }, latestEdition] = await Promise.all([
+  const [{ instruments, fetchedAt }, latestEdition, summaries] = await Promise.all([
     getMarketData(),
     getLatestEdition(),
+    getEditionSummaries(30),
   ]);
 
   // The roundel carries today's issued number, or the number the evening
@@ -147,7 +149,7 @@ export default async function Home() {
           <NotesColumn date={now} />
         </div>
 
-        <ArchiveStrip edition={edition} date={now} />
+        <ArchiveStrip summaries={summaries} date={now} />
 
         <FooterBand edition={edition} sources={sources} fetchedAt={fetchedAt} />
       </main>

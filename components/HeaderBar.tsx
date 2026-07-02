@@ -2,7 +2,13 @@ import Link from "next/link";
 import { Medallion } from "./Medallion";
 import { formatShortDateTime } from "@/lib/format";
 
-const NAV = ["Today", "Archive", "Curve", "Diary", "Learn"] as const;
+const NAV: { label: string; href?: string }[] = [
+  { label: "Today", href: "/" },
+  { label: "Archive", href: "/archive" },
+  { label: "Curve" },
+  { label: "Diary" },
+  { label: "Learn" },
+];
 
 interface HeaderBarProps {
   weather: string;
@@ -27,22 +33,26 @@ export function HeaderBar({ weather, weatherSub, petals, storm, date, issueSlot 
 
         <nav aria-label="Primary" className="hidden min-[960px]:flex min-[960px]:gap-[26px]">
           {NAV.map((item) =>
-            item === "Today" ? (
+            item.href ? (
               <Link
-                key={item}
-                href="/"
-                aria-current="page"
-                className="caps border-b-2 border-brass py-1 !text-xs text-brg"
+                key={item.label}
+                href={item.href}
+                aria-current={item.label === "Today" ? "page" : undefined}
+                className={`caps border-b-2 py-1 !text-xs ${
+                  item.label === "Today"
+                    ? "border-brass text-brg"
+                    : "border-transparent text-muted hover:text-brg"
+                }`}
               >
-                {item}
+                {item.label}
               </Link>
             ) : (
               <span
-                key={item}
+                key={item.label}
                 className="caps cursor-default border-b-2 border-transparent py-1 !text-xs text-muted"
                 title="Coming in a later phase"
               >
-                {item}
+                {item.label}
               </span>
             ),
           )}

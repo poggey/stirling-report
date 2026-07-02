@@ -42,52 +42,52 @@ export function LedgerPanel({ instruments }: { instruments: MarketInstrument[] }
         <span className="caps text-cream/55">highest salience</span>
       </div>
 
-      <div className="flex flex-1 flex-col">
+      <div>
       {instruments.map((instrument) => {
         const change = formatChange(instrument);
         const hot = Math.abs(instrument.z) >= 2;
         return (
           <div
             key={instrument.id}
-            className="relative z-[2] flex flex-1 flex-col justify-center border-b border-cream/10 py-3.5 last:border-b-0"
+            className="relative z-[2] border-b border-cream/10 py-3 last:border-b-0"
           >
-            {Math.abs(instrument.z) >= 2.5 && (
-              <p className="mb-1 text-right font-display text-[11.5px] italic leading-none text-brass">
-                {Math.abs(instrument.z).toFixed(1)}σ day against its month
-              </p>
-            )}
-            <div className="flex items-center gap-3.5">
-            <div className="min-w-0 flex-1">
+            <div className="flex items-baseline justify-between gap-3">
               <p className="caps truncate text-cream/60">{instrument.label}</p>
-              <p className={`figures mt-px text-xl ${hot ? "font-bold" : "font-semibold"}`}>
-                {formatLevel(instrument)}
-              </p>
-              {instrument.health.status !== "ok" && (
-                <p className="text-[11px] text-cream/60">
-                  {instrument.health.status === "stale"
-                    ? `stale since ${instrument.health.asOf}`
-                    : "unavailable"}
+              {Math.abs(instrument.z) >= 2.5 && (
+                <p className="shrink-0 font-display text-[11.5px] italic leading-none text-brass">
+                  {Math.abs(instrument.z).toFixed(1)}σ vs its month
                 </p>
               )}
             </div>
-            <Sparkline
-              points={instrument.points.slice(-30)}
-              stroke="#F2EFDF"
-              strokeWidth={strokeFromZ(instrument.z)}
-              width={72}
-              height={24}
-              className={hot ? "opacity-95" : "opacity-80"}
-              precision={instrument.precision}
-              isRate={instrument.class === "rate"}
-            />
-            <p className={`figures min-w-[72px] text-right text-[13px] font-bold ${CHANGE_TONE[change.tone]}`}>
-              <span aria-hidden="true">{change.glyph}</span>
-              <span className="sr-only">
-                {change.direction === "rise" ? "up" : change.direction === "fall" ? "down" : "unchanged"}
-              </span>{" "}
-              {change.text}
-            </p>
+            <div className="mt-1 flex items-center gap-3.5">
+              <p className={`figures min-w-0 flex-1 truncate text-xl leading-none ${hot ? "font-bold" : "font-semibold"}`}>
+                {formatLevel(instrument)}
+              </p>
+              <Sparkline
+                points={instrument.points.slice(-30)}
+                stroke="#F2EFDF"
+                strokeWidth={strokeFromZ(instrument.z)}
+                width={72}
+                height={24}
+                className={hot ? "opacity-95" : "opacity-80"}
+                precision={instrument.precision}
+                isRate={instrument.class === "rate"}
+              />
+              <p className={`figures min-w-[68px] shrink-0 text-right text-[13px] font-bold ${CHANGE_TONE[change.tone]}`}>
+                <span aria-hidden="true">{change.glyph}</span>
+                <span className="sr-only">
+                  {change.direction === "rise" ? "up" : change.direction === "fall" ? "down" : "unchanged"}
+                </span>{" "}
+                {change.text}
+              </p>
             </div>
+            {instrument.health.status !== "ok" && (
+              <p className="mt-0.5 text-[11px] text-cream/60">
+                {instrument.health.status === "stale"
+                  ? `stale since ${instrument.health.asOf}`
+                  : "unavailable"}
+              </p>
+            )}
           </div>
         );
       })}

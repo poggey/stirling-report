@@ -50,6 +50,7 @@ function contextFor(edition: Edition): string {
       title: w.title,
       source: w.source,
       publishedAt: w.publishedAt,
+      salience: w.score,
     })),
     board: edition.salience.slice(0, 10).map((s) => {
       const i = edition.instruments.find((x) => x.id === s.id);

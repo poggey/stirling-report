@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Archivo, Archivo_Narrow } from "next/font/google";
 import { LearnProvider } from "@/components/learn/LearnProvider";
+import { SiteChrome } from "@/components/SiteChrome";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -40,7 +41,10 @@ export default function RootLayout({
       className={`${fraunces.variable} ${archivo.variable} ${archivoNarrow.variable}`}
     >
       <body>
-        <LearnProvider>{children}</LearnProvider>
+        <LearnProvider>
+          <SiteChrome />
+          {children}
+        </LearnProvider>
       </body>
     </html>
   );

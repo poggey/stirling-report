@@ -3,30 +3,20 @@ import { CentralBankWatch } from "@/components/CentralBankWatch";
 import { EconomicDiary } from "@/components/EconomicDiary";
 import { FooterBand } from "@/components/FooterBand";
 import { GiltCurveCard } from "@/components/GiltCurveCard";
-import { HeaderBar } from "@/components/HeaderBar";
 import { LedgerPanel } from "@/components/LedgerPanel";
-import { petalsFromZ } from "@/components/Medallion";
 import { NotesColumn } from "@/components/NotesColumn";
 import { StatRow } from "@/components/StatRow";
 import { StoryOfTheDay } from "@/components/StoryOfTheDay";
-import {
-  IssueButton,
-  ReportProvider,
-  ReportSheet,
-  type ReportPayload,
-} from "@/components/report/ReportSheet";
-import { templateBriefing } from "@/lib/briefing/template";
 import { getLatestEdition } from "@/lib/editions/store";
 import { getEditionSummaries } from "@/lib/editions/summaries";
-import { ukDateOf, type Edition } from "@/lib/editions/types";
-import { formatChange, formatUkDate } from "@/lib/format";
+import { ukDateOf } from "@/lib/editions/types";
 import { getMarketData, CURVE_ONLY_IDS, POLICY_IDS } from "@/lib/market-data";
-import { rankBySalience, salienceTable } from "@/lib/salience";
+import { rankBySalience } from "@/lib/salience";
 import { buildStory } from "@/lib/story";
-import { readWeather, WEATHER_LABEL, WEATHER_SUB } from "@/lib/weather";
 
 // Light intraday cache: the page re-renders at most every 30 minutes; all
 // source fetches inside are tagged with the same revalidation window.
+// The header, weather chip and report sheet live in SiteChrome (layout).
 export const revalidate = 1800;
 
 // Instruments that sit in the curve cards / Central Bank Watch, not the board.
@@ -57,7 +47,6 @@ export default async function Home() {
   );
 
   const story = buildStory(ranked);
-  const weather = readWeather(instruments);
 
   const byId = (id: string) => instruments.find((i) => i.id === id);
   const gilt5y = byId("gilt5y");
@@ -66,100 +55,49 @@ export default async function Home() {
   const sources = [...new Set(instruments.map((i) => i.source))];
   const now = new Date();
 
-  // The report sheet serves today's cached edition when the 22:05 snapshot
-  // has run; before that it issues an honestly-labelled intraday edition
-  // built from the same deterministic engine (WHITEPAPER §4.1).
-  const issuedToday = latestEdition?.date === today ? latestEdition : null;
-  const reportSource: Edition = issuedToday ?? {
-    schema: 1,
-    date: today,
-    number: edition,
-    generatedAt: fetchedAt,
-    weather,
-    story,
-    salience: salienceTable(instruments.filter((i) => !OFF_BOARD.has(i.id))),
-    instruments,
-    sources,
-  };
-  const reportStory = reportSource.story;
-  const reportPayload: ReportPayload = {
-    dateLabel: formatUkDate(now),
-    edition: reportSource.number,
-    weatherLabel: WEATHER_LABEL[reportSource.weather.state],
-    petals: petalsFromZ(reportSource.weather.intensity),
-    storm: reportSource.weather.state === "storm",
-    headline: `${reportStory.headlinePlain}${reportStory.headlineEm ? ` ${reportStory.headlineEm}` : ""}`,
-    intraday: !issuedToday,
-    asOf: new Date(reportSource.generatedAt).toLocaleTimeString("en-GB", {
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
-    stats: reportSource.salience.slice(0, 4).map((s) => {
-      const i = reportSource.instruments.find((x) => x.id === s.id)!;
-      const c = formatChange(i);
-      return { label: i.label, text: `${c.glyph} ${c.text}`, tone: c.tone };
-    }),
-    briefings: reportSource.briefings ?? {
-      template: templateBriefing(reportSource),
-      ai: false,
-    },
-  };
-
   return (
-    <ReportProvider>
-      <HeaderBar
-        weather={WEATHER_LABEL[weather.state]}
-        weatherSub={WEATHER_SUB[weather.state]}
-        petals={petalsFromZ(weather.intensity)}
-        storm={weather.state === "storm"}
-        date={now}
-        issueSlot={<IssueButton />}
-      />
-      <ReportSheet payload={reportPayload} />
+    <main className="mx-auto max-w-[1200px] px-4 sm:px-7">
+      <div className="mt-[30px] grid grid-cols-1 gap-6 min-[960px]:grid-cols-[7.2fr_4.8fr]">
+        <StoryOfTheDay
+          story={story}
+          edition={edition}
+          topZ={ranked[0]?.z ?? 0}
+          fetchedAt={fetchedAt}
+          instrumentCount={withData.length}
+          sourceCount={sources.length}
+        />
+        <LedgerPanel instruments={ledger} />
+      </div>
 
-      <main className="mx-auto max-w-[1200px] px-4 sm:px-7">
-        <div className="mt-[30px] grid grid-cols-1 gap-6 min-[960px]:grid-cols-[7.2fr_4.8fr]">
-          <StoryOfTheDay
-            story={story}
-            edition={edition}
-            topZ={ranked[0]?.z ?? 0}
+      <StatRow instruments={board} />
+
+      <div className="mt-6 grid grid-cols-1 gap-6 min-[960px]:grid-cols-[7fr_5fr]">
+        {gilt5y && gilt10y && gilt20y && (
+          <GiltCurveCard
+            gilt5y={gilt5y}
+            gilt10y={gilt10y}
+            gilt20y={gilt20y}
             fetchedAt={fetchedAt}
-            instrumentCount={withData.length}
-            sourceCount={sources.length}
           />
-          <LedgerPanel instruments={ledger} />
-        </div>
+        )}
+        <CentralBankWatch
+          rates={
+            new Map(
+              instruments.filter((i) => POLICY_IDS.has(i.id)).map((i) => [i.id, i]),
+            )
+          }
+          today={today}
+        />
+      </div>
 
-        <StatRow instruments={board} />
+      <div className="mt-6 grid grid-cols-1 gap-6 min-[960px]:grid-cols-[7fr_5fr]">
+        <EconomicDiary today={today} limit={5} />
+        <NotesColumn date={now} />
+      </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-6 min-[960px]:grid-cols-[7fr_5fr]">
-          {gilt5y && gilt10y && gilt20y && (
-            <GiltCurveCard
-              gilt5y={gilt5y}
-              gilt10y={gilt10y}
-              gilt20y={gilt20y}
-              fetchedAt={fetchedAt}
-            />
-          )}
-          <CentralBankWatch
-            rates={
-              new Map(
-                instruments.filter((i) => POLICY_IDS.has(i.id)).map((i) => [i.id, i]),
-              )
-            }
-            today={today}
-          />
-        </div>
+      <ArchiveStrip summaries={summaries} date={now} />
 
-        <div className="mt-6 grid grid-cols-1 gap-6 min-[960px]:grid-cols-[7fr_5fr]">
-          <EconomicDiary today={today} limit={5} />
-          <NotesColumn date={now} />
-        </div>
-
-        <ArchiveStrip summaries={summaries} date={now} />
-
-        <FooterBand edition={edition} sources={sources} fetchedAt={fetchedAt} />
-      </main>
-    </ReportProvider>
+      <FooterBand edition={edition} sources={sources} fetchedAt={fetchedAt} />
+    </main>
   );
 }

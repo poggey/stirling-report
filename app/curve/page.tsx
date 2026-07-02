@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { CurveChart } from "@/components/CurveChart";
 import { SpreadTracker } from "@/components/SpreadTracker";
 import { getMarketData } from "@/lib/market-data";
@@ -26,24 +25,19 @@ export default async function CurvePage() {
 
   return (
     <main className="mx-auto max-w-[1200px] px-4 pb-16 sm:px-7">
-      <div className="mt-[30px] flex flex-wrap items-baseline justify-between gap-3">
-        <div>
-          <p className="caps flex items-center gap-2.5 text-brg">
-            <span aria-hidden="true" className="inline-block h-0.5 w-[26px] rounded bg-brg" />
-            The Yield Curve Observatory
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-[540] text-ink">The curve</h1>
-          <p className="mt-2 max-w-[58ch] text-[15px] text-muted">
-            Today&rsquo;s UK gilt and US Treasury curves against their shapes
-            one month and one year ago. An inverted curve — short yields above
-            long — has preceded every US recession of the past half-century,
-            which is why the 2s10s spread is the most-watched signal in
-            markets.
-          </p>
-        </div>
-        <Link href="/" className="text-sm font-semibold text-brg-600 hover:underline">
-          ← Today
-        </Link>
+      <div className="mt-[30px]">
+        <p className="caps flex items-center gap-2.5 text-brg">
+          <span aria-hidden="true" className="inline-block h-0.5 w-[26px] rounded bg-brg" />
+          The Yield Curve Observatory
+        </p>
+        <h1 className="mt-3 font-display text-4xl font-[540] text-ink">The curve</h1>
+        <p className="mt-2 max-w-[58ch] text-[15px] text-muted">
+          Today&rsquo;s UK gilt and US Treasury curves against their shapes
+          one month and one year ago. An inverted curve — short yields above
+          long — has preceded every US recession of the past half-century,
+          which is why the 2s10s spread is the most-watched signal in
+          markets.
+        </p>
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-6 min-[960px]:grid-cols-2">

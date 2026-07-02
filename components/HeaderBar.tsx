@@ -1,15 +1,7 @@
-import Link from "next/link";
 import { LearnToggle } from "./learn/LearnProvider";
 import { Medallion } from "./Medallion";
+import { NavLinks } from "./NavLinks";
 import { formatShortDateTime } from "@/lib/format";
-
-const NAV: { label: string; href?: string }[] = [
-  { label: "Today", href: "/" },
-  { label: "Archive", href: "/archive" },
-  { label: "Curve", href: "/curve" },
-  { label: "Diary", href: "/diary" },
-  { label: "Learn", href: "/learn" },
-];
 
 interface HeaderBarProps {
   weather: string;
@@ -32,32 +24,7 @@ export function HeaderBar({ weather, weatherSub, petals, storm, date, issueSlot 
           Stirling<span className="not-italic text-brass">.</span>
         </p>
 
-        <nav aria-label="Primary" className="hidden min-[960px]:flex min-[960px]:gap-[26px]">
-          {NAV.map((item) =>
-            item.href ? (
-              <Link
-                key={item.label}
-                href={item.href}
-                aria-current={item.label === "Today" ? "page" : undefined}
-                className={`caps border-b-2 py-1 !text-xs ${
-                  item.label === "Today"
-                    ? "border-brass text-brg"
-                    : "border-transparent text-muted hover:text-brg"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <span
-                key={item.label}
-                className="caps cursor-default border-b-2 border-transparent py-1 !text-xs text-muted"
-                title="Coming in a later phase"
-              >
-                {item.label}
-              </span>
-            ),
-          )}
-        </nav>
+        <NavLinks />
 
         <div className="ml-auto flex flex-wrap items-center justify-end gap-3 sm:gap-4">
           <time

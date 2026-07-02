@@ -84,8 +84,9 @@ export default async function ReplayPage({ params }: Params) {
 
   return (
     <ReportProvider>
-      {/* The replay banner: past must never be mistaken for present */}
-      <div className="sticky top-0 z-40 bg-brg text-cream">
+      {/* The replay banner: past must never be mistaken for present.
+          Sticks just below the persistent site header. */}
+      <div className="sticky top-[70px] z-30 bg-brg text-cream">
         <div className="mx-auto flex min-h-[52px] max-w-[1200px] flex-wrap items-center gap-x-5 gap-y-2 px-4 py-2 sm:px-7">
           <span className="caps text-brass">Replay</span>
           <span className="text-sm font-semibold">
@@ -96,10 +97,7 @@ export default async function ReplayPage({ params }: Params) {
             <Link href="/archive" className="text-xs font-semibold text-cream/80 hover:text-cream">
               ← Archive
             </Link>
-            <Link href="/" className="text-xs font-semibold text-cream/80 hover:text-cream">
-              Today →
-            </Link>
-            <IssueButton />
+            <IssueButton label="Read this report" />
           </span>
         </div>
       </div>

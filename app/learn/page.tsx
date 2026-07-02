@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Flashcards } from "@/components/learn/Flashcards";
-import { LearnToggle } from "@/components/learn/LearnProvider";
 import { PersonalGlossary } from "@/components/learn/PersonalGlossary";
 import { getLatestEdition } from "@/lib/editions/store";
 import { getEditionSummaries } from "@/lib/editions/summaries";
@@ -33,26 +31,19 @@ export default async function LearnPage() {
 
   return (
     <main className="mx-auto max-w-[1200px] px-4 pb-16 sm:px-7">
-      <div className="mt-[30px] flex flex-wrap items-baseline justify-between gap-3">
-        <div>
-          <p className="caps flex items-center gap-2.5 text-brg">
-            <span aria-hidden="true" className="inline-block h-0.5 w-[26px] rounded bg-brg" />
-            The ambient tutor
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-[540] text-ink">Learn</h1>
-          <p className="mt-2 max-w-[58ch] text-[15px] text-muted">
-            Switch Learn mode on and every technical term across Stirling
-            grows a dotted brass underline — click for a two-sentence
-            definition and why it matters today. Terms you open build your
-            personal glossary, kept in this browser only.
-          </p>
-        </div>
-        <div className="flex items-center gap-4">
-          <LearnToggle />
-          <Link href="/" className="text-sm font-semibold text-brg-600 hover:underline">
-            ← Today
-          </Link>
-        </div>
+      <div className="mt-[30px]">
+        <p className="caps flex items-center gap-2.5 text-brg">
+          <span aria-hidden="true" className="inline-block h-0.5 w-[26px] rounded bg-brg" />
+          The ambient tutor
+        </p>
+        <h1 className="mt-3 font-display text-4xl font-[540] text-ink">Learn</h1>
+        <p className="mt-2 max-w-[58ch] text-[15px] text-muted">
+          Switch Learn mode on — the toggle lives in the header — and every
+          technical term across Stirling grows a dotted brass underline:
+          click for a two-sentence definition and why it matters today.
+          Terms you open build your personal glossary, kept in this browser
+          only.
+        </p>
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-6 min-[960px]:grid-cols-[5fr_7fr]">

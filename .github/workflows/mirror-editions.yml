@@ -1,0 +1,52 @@
+# Mirrors every edition JSON from the deployed site into /data/editions
+# nightly — the repo doubles as an open dataset and a third redundant copy
+# of the archive (WHITEPAPER §7.1). Runs after the 22:05 snapshot cron.
+#
+# Set the repository variable SITE_URL to the production URL
+# (e.g. https://stirling-report.vercel.app).
+
+name: Mirror editions
+
+on:
+  schedule:
+    - cron: "20 22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch any editions missing from the mirror
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SITE_URL:-}" ]; then
+            echo "SITE_URL repository variable is not set" >&2
+            exit 1
+          fi
+          mkdir -p data/editions
+          dates=$(curl -sf "$SITE_URL/api/editions/index" | python3 -c 'import json,sys; print("\n".join(json.load(sys.stdin)["dates"]))')
+          for d in $dates; do
+            if [ ! -f "data/editions/$d.json" ]; then
+              echo "mirroring $d"
+              curl -sf "$SITE_URL/api/editions/$d" -o "data/editions/$d.json"
+            fi
+          done
+
+      - name: Commit the mirror
+        run: |
+          git config user.name "stirling-mirror[bot]"
+          git config user.email "actions@github.com"
+          git add data/editions
+          if git diff --cached --quiet; then
+            echo "nothing new to mirror"
+          else
+            git commit -m "Mirror editions $(date -u +%F)"
+            git push
+          fi

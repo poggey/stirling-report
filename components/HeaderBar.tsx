@@ -8,10 +8,11 @@ interface HeaderBarProps {
   weather: string;
   weatherSub: string;
   petals: number;
+  storm?: boolean;
   date: Date;
 }
 
-export function HeaderBar({ weather, weatherSub, petals, date }: HeaderBarProps) {
+export function HeaderBar({ weather, weatherSub, petals, storm, date }: HeaderBarProps) {
   return (
     <header
       className="sticky top-0 z-40 border-b border-line border-t-[3px] border-t-brg bg-ivory-0/90 backdrop-blur-[10px]"
@@ -54,7 +55,7 @@ export function HeaderBar({ weather, weatherSub, petals, date }: HeaderBarProps)
           </time>
 
           <span className="flex items-center gap-2 rounded-full border border-line bg-ivory-1 py-1.5 pl-2 pr-3.5">
-            <Medallion petals={petals} size={22} />
+            <Medallion petals={petals} storm={storm} size={22} />
             <span className="leading-tight">
               <span className="block text-[11px] font-bold tracking-[0.07em] text-brg">
                 {weather.toUpperCase()}

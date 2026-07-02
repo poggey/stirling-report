@@ -1,5 +1,6 @@
 import type { MarketInstrument } from "@/lib/market-data";
 import type { SalienceEntry } from "@/lib/salience";
+import type { Headline } from "@/lib/sources/wires";
 import type { Story } from "@/lib/story";
 import type { WeatherReading } from "@/lib/weather";
 
@@ -30,6 +31,8 @@ export interface Edition {
   salience: SalienceEntry[];
   instruments: MarketInstrument[];
   sources: string[];
+  /** The wires as they stood at snapshot time — headlines only, linked out. */
+  wires?: Headline[];
   briefings?: Briefings;
 }
 

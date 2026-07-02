@@ -16,6 +16,13 @@ export interface Story {
   headlineEm: string | null;
   standfirst: string;
   subplots: string[];
+  /**
+   * News-aware phrasing of the same story, written by the AI layer inside
+   * the desk-note call and grounded in the day's wires. The deterministic
+   * ranking still decides what leads; this only words it. Optional — the
+   * deterministic headline always exists as the fallback.
+   */
+  aiHeadline?: string;
 }
 
 const SECTION: Record<InstrumentClass, string> = {

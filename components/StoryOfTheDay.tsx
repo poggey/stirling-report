@@ -43,9 +43,13 @@ export function StoryOfTheDay({
       </p>
 
       <h1 className="max-w-[20ch] font-display text-[clamp(32px,4.2vw,50px)] font-[540] leading-[1.08] tracking-[-0.014em] text-ink">
-        {story.headlinePlain}{" "}
-        {story.headlineEm && (
-          <em className="font-[480] italic text-brg">{story.headlineEm}</em>
+        {story.aiHeadline ?? (
+          <>
+            {story.headlinePlain}{" "}
+            {story.headlineEm && (
+              <em className="font-[480] italic text-brg">{story.headlineEm}</em>
+            )}
+          </>
         )}
       </h1>
 
@@ -74,6 +78,12 @@ export function StoryOfTheDay({
           <dt className="inline">Snapshot </dt>
           <dd className="figures inline font-semibold text-ink">{snapshotTime}</dd>
         </div>
+        {story.aiHeadline && (
+          <div>
+            <dt className="sr-only">Headline method</dt>
+            <dd>Ranked deterministically · phrased by AI from the wires</dd>
+          </div>
+        )}
       </dl>
 
       {story.subplots.length > 0 && (

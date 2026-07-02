@@ -61,7 +61,9 @@ export async function SiteChrome() {
     weatherLabel: WEATHER_LABEL[reportSource.weather.state],
     petals: petalsFromZ(reportSource.weather.intensity),
     storm: reportSource.weather.state === "storm",
-    headline: `${reportStory.headlinePlain}${reportStory.headlineEm ? ` ${reportStory.headlineEm}` : ""}`,
+    headline:
+      reportStory.aiHeadline ??
+      `${reportStory.headlinePlain}${reportStory.headlineEm ? ` ${reportStory.headlineEm}` : ""}`,
     intraday: !issuedToday,
     asOf: new Date(reportSource.generatedAt).toLocaleTimeString("en-GB", {
       hour: "2-digit",

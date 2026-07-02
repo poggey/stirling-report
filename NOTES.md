@@ -79,6 +79,26 @@ trusting anything below after a long gap.
 - Consensus expectations are commercial data (WHITEPAPER §13): the diary
   omits them and scores surprise direction against the prior print only.
 
+## Wires — official RSS feeds (no key)
+
+- Verified feeds: BBC Business/World (`feeds.bbci.co.uk/news/{business,world}/rss.xml`),
+  BoE news (`bankofengland.co.uk/rss/news`), Fed press
+  (`federalreserve.gov/feeds/press_all.xml`), ECB press
+  (`ecb.europa.eu/rss/press.html`).
+- Quirks: BBC wraps titles in CDATA; the Fed wraps pubDate in CDATA;
+  timezone formats vary (GMT vs +0100 vs +0200) — Date.parse copes.
+- Headlines only, always linked out (WHITEPAPER §5). The AI receives them as
+  labelled context and may explain a move with hedged language, but the
+  salience ranking alone decides what leads; the news-aware headline is
+  parsed out of the desk-note call so the cron stays ≤3 AI calls/day.
+
+## Gemini (GEMINI_API_KEY)
+
+- `gemini-2.0-flash` 429s on the current free tier; `gemini-2.5-flash` works
+  (as of Jul 2026). 2.5-series models spend "thinking" tokens from
+  maxOutputTokens — set `thinkingConfig.thinkingBudget: 0` or briefings
+  truncate mid-sentence.
+
 ## FRED (US Treasury yields — key in FRED_API_KEY)
 
 - API: `/fred/series/observations?series_id=DGS2&api_key=…&file_type=json`

@@ -36,7 +36,9 @@ export async function GET(req: NextRequest) {
   }
 
   const edition = await buildEdition();
-  edition.briefings = await buildBriefings(edition);
+  const { briefings, aiHeadline } = await buildBriefings(edition);
+  edition.briefings = briefings;
+  if (aiHeadline) edition.story.aiHeadline = aiHeadline;
   const down = edition.instruments.filter((i) => i.health.status === "down");
   const { stored } = await putEdition(edition);
 

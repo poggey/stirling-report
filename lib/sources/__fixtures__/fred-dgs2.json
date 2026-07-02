@@ -2,12 +2,6 @@
   "units": "lin",
   "observations": [
     {
-      "realtime_start": "2024-11-20",
-      "realtime_end": "2024-11-20",
-      "date": "2024-11-20",
-      "value": "4.31"
-    },
-    {
       "realtime_start": "2024-11-21",
       "realtime_end": "2024-11-21",
       "date": "2024-11-21",
@@ -2520,6 +2514,12 @@
       "realtime_end": "2026-06-30",
       "date": "2026-06-30",
       "value": "4.14"
+    },
+    {
+      "realtime_start": "2026-07-01",
+      "realtime_end": "2026-07-01",
+      "date": "2026-07-01",
+      "value": "4.17"
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { getMarketData } from "@/lib/market-data";
 import { rankBySalience, salienceTable } from "@/lib/salience";
+import { fetchWires } from "@/lib/sources/wires";
 import { buildStory } from "@/lib/story";
 import { readWeather } from "@/lib/weather";
 import { getLatestEdition } from "./store";
@@ -10,9 +11,12 @@ import { ukDateOf, type Edition } from "./types";
  * last stored edition; the first ever issued is Nº 1.
  */
 export async function buildEdition(): Promise<Edition> {
-  const { instruments, fetchedAt } = await getMarketData();
+  const [{ instruments, fetchedAt }, wires, latest] = await Promise.all([
+    getMarketData(),
+    fetchWires(),
+    getLatestEdition(),
+  ]);
   const ranked = rankBySalience(instruments.filter((i) => i.id !== "gilt20y"));
-  const latest = await getLatestEdition();
 
   return {
     schema: 1,
@@ -24,5 +28,6 @@ export async function buildEdition(): Promise<Edition> {
     salience: salienceTable(instruments),
     instruments,
     sources: [...new Set(instruments.map((i) => i.source))],
+    wires,
   };
 }

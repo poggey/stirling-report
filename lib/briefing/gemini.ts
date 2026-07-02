@@ -29,10 +29,15 @@ const SYSTEM_RULES = `You are the analyst for Stirling, a daily economic briefin
 Write a briefing of exactly three short paragraphs, then a section headed "${WATCH_HEADING}" with three numbered items.
 Hard rules:
 - Use ONLY numbers present in the context JSON. Never invent, extrapolate or recall a figure from memory.
+- The context may include a "wires" list of official news headlines. You may use them to EXPLAIN moves with hedged language ("consistent with reports that…") and must cite no event that is not in the wires. The wires never change which move matters — the salience ranking decides that.
 - Attribute causality with hedged language ("consistent with", "likely reflects") — never false certainty.
 - No investment advice, no buy/sell/hold language, no price targets.
-- The watch items must derive only from instruments and readings in the context.
+- The watch items must derive only from instruments, readings and wires in the context.
 - British English. No headings other than the watch heading, no bullet decoration beyond the numbered watch list.`;
+
+const HEADLINE_INSTRUCTION = `Before the briefing, output exactly one line in the form:
+HEADLINE: <a newspaper headline of at most 12 words>
+It must lead with the top-ranked instrument's move and may attribute it, hedged, to a wire headline (e.g. "Oil surges as Gulf conflict reports rattle markets"). Name no event absent from the wires. Then a blank line, then the briefing.`;
 
 function contextFor(edition: Edition): string {
   // Compact context: the ranking plus the numbers the model may cite.
@@ -41,6 +46,11 @@ function contextFor(edition: Edition): string {
     edition: edition.number,
     weather: edition.weather,
     story: edition.story,
+    wires: (edition.wires ?? []).map((w) => ({
+      title: w.title,
+      source: w.source,
+      publishedAt: w.publishedAt,
+    })),
     board: edition.salience.slice(0, 10).map((s) => {
       const i = edition.instruments.find((x) => x.id === s.id);
       return {
@@ -98,34 +108,47 @@ async function callGemini(
 
 /**
  * Builds the day's briefings: the deterministic template always, plus the
- * three AI tones when a key is present and the calls succeed. ≤3 calls/day.
+ * three AI tones when a key is present and the calls succeed. The
+ * news-aware headline rides inside the desk-note call so the cron stays at
+ * ≤3 AI calls/day (CLAUDE.md).
  */
-export async function buildBriefings(edition: Edition): Promise<Briefings> {
+export async function buildBriefings(
+  edition: Edition,
+): Promise<{ briefings: Briefings; aiHeadline?: string }> {
   const briefings: Briefings = {
     template: templateBriefing(edition),
     ai: false,
   };
 
   const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) return briefings;
+  if (!apiKey) return { briefings };
 
   // gemini-2.0-flash 429s on the current free tier; 2.5-flash is the
   // free-quota model as of Jul 2026. Override with GEMINI_MODEL if it moves.
   const model = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
   const context = `Context JSON for ${edition.date}:\n${contextFor(edition)}`;
+  let aiHeadline: string | undefined;
 
   for (const tone of TONES) {
+    const wantHeadline = tone.key === "deskNote";
     const text = await callGemini(
       apiKey,
       model,
-      `${SYSTEM_RULES}\n${tone.instruction}`,
+      `${SYSTEM_RULES}\n${tone.instruction}${wantHeadline ? `\n${HEADLINE_INSTRUCTION}` : ""}`,
       context,
     );
-    if (text) {
-      briefings[tone.key] = text;
-      briefings.ai = true;
-      briefings.model = model;
+    if (!text) continue;
+    let body = text;
+    if (wantHeadline) {
+      const m = text.match(/^HEADLINE:\s*(.+)\s*\n+([\s\S]*)$/);
+      if (m) {
+        aiHeadline = m[1].trim().replace(/^["']|["']$/g, "");
+        body = m[2].trim();
+      }
     }
+    briefings[tone.key] = body;
+    briefings.ai = true;
+    briefings.model = model;
   }
-  return briefings;
+  return { briefings, aiHeadline };
 }

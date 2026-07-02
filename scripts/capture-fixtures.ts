@@ -102,6 +102,12 @@ async function main() {
     "https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.DFR.LEV?format=csvdata&lastNObservations=60",
   );
   await save("ecb-dfr.csv", (await ecb.text()).trim());
+
+  // BBC Business RSS — one representative feed for the wires parser test
+  const rss = await fetch("https://feeds.bbci.co.uk/news/business/rss.xml", {
+    headers: { "User-Agent": "stirling-fixture-capture/0.1" },
+  });
+  await save("bbc-business.rss.xml", (await rss.text()).trim());
 }
 
 main();

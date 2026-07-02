@@ -7,11 +7,13 @@ import { LedgerPanel } from "@/components/LedgerPanel";
 import { NotesColumn } from "@/components/NotesColumn";
 import { StatRow } from "@/components/StatRow";
 import { StoryOfTheDay } from "@/components/StoryOfTheDay";
+import { WiresPanel } from "@/components/WiresPanel";
 import { getLatestEdition } from "@/lib/editions/store";
 import { getEditionSummaries } from "@/lib/editions/summaries";
 import { ukDateOf } from "@/lib/editions/types";
 import { getMarketData, CURVE_ONLY_IDS, POLICY_IDS } from "@/lib/market-data";
 import { rankBySalience } from "@/lib/salience";
+import { fetchWires } from "@/lib/sources/wires";
 import { buildStory } from "@/lib/story";
 
 // Light intraday cache: the page re-renders at most every 30 minutes; all
@@ -23,11 +25,13 @@ export const revalidate = 1800;
 const OFF_BOARD = new Set([...CURVE_ONLY_IDS, ...POLICY_IDS]);
 
 export default async function Home() {
-  const [{ instruments, fetchedAt }, latestEdition, summaries] = await Promise.all([
-    getMarketData(),
-    getLatestEdition(),
-    getEditionSummaries(30),
-  ]);
+  const [{ instruments, fetchedAt }, latestEdition, summaries, wires] =
+    await Promise.all([
+      getMarketData(),
+      getLatestEdition(),
+      getEditionSummaries(30),
+      fetchWires(),
+    ]);
 
   // The roundel carries today's issued number, or the number the evening
   // snapshot will take if it has not run yet.
@@ -46,7 +50,10 @@ export default async function Home() {
     (i) => !ledgerIds.has(i.id) && !OFF_BOARD.has(i.id),
   );
 
-  const story = buildStory(ranked);
+  // Once the evening snapshot locks the day, its story (with the AI's
+  // news-aware headline) leads; before that the live deterministic one does.
+  const issuedToday = latestEdition?.date === today ? latestEdition : null;
+  const story = issuedToday?.story ?? buildStory(ranked);
 
   const byId = (id: string) => instruments.find((i) => i.id === id);
   const gilt5y = byId("gilt5y");
@@ -68,6 +75,8 @@ export default async function Home() {
         />
         <LedgerPanel instruments={ledger} />
       </div>
+
+      <WiresPanel headlines={wires} mode="live" />
 
       <StatRow instruments={board} />
 

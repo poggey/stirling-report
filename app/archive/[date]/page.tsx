@@ -13,6 +13,7 @@ import {
 } from "@/components/report/ReportSheet";
 import { StatRow } from "@/components/StatRow";
 import { StoryOfTheDay } from "@/components/StoryOfTheDay";
+import { WiresPanel } from "@/components/WiresPanel";
 import { templateBriefing } from "@/lib/briefing/template";
 import { getEdition } from "@/lib/editions/store";
 import { formatChange } from "@/lib/format";
@@ -70,7 +71,9 @@ export default async function ReplayPage({ params }: Params) {
     weatherLabel: WEATHER_LABEL[edition.weather.state],
     petals: petalsFromZ(edition.weather.intensity),
     storm: edition.weather.state === "storm",
-    headline: `${edition.story.headlinePlain}${edition.story.headlineEm ? ` ${edition.story.headlineEm}` : ""}`,
+    headline:
+      edition.story.aiHeadline ??
+      `${edition.story.headlinePlain}${edition.story.headlineEm ? ` ${edition.story.headlineEm}` : ""}`,
     intraday: false,
     asOf: "",
     stats: edition.salience.slice(0, 4).flatMap((s) => {
@@ -115,6 +118,10 @@ export default async function ReplayPage({ params }: Params) {
           />
           <LedgerPanel instruments={ledger} />
         </div>
+
+        {edition.wires && edition.wires.length > 0 && (
+          <WiresPanel headlines={edition.wires} mode="archived" />
+        )}
 
         <StatRow instruments={board} />
 

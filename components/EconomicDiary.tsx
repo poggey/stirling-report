@@ -1,9 +1,45 @@
-/**
- * The Economic Diary needs the curated release calendar and consensus
- * handling that Phase 5 builds (§4.7). Until then the card holds its place
- * honestly — headers real, rows empty, nothing invented.
- */
-export function EconomicDiary() {
+import Link from "next/link";
+import {
+  DIARY,
+  SCHEDULE_CURATED_AT,
+  diaryStatus,
+  surpriseIndex,
+  type DiaryEntry,
+} from "@/lib/diary";
+
+const PILL = {
+  due: "border border-line text-muted",
+  printed: "bg-sage text-ink",
+  beat: "bg-rise/10 text-rise",
+  miss: "bg-fall/10 text-fall",
+} as const;
+
+function Pill({ entry, today }: { entry: DiaryEntry; today: string }) {
+  const status = diaryStatus(entry, today);
+  const label =
+    status === "due"
+      ? entry.time
+      : status === "printed"
+        ? (entry.actual ?? "printed")
+        : status.toUpperCase();
+  return (
+    <span
+      className={`figures inline-block rounded-full px-2.5 py-[3px] text-[9.5px] font-bold tracking-[0.08em] ${PILL[status]}`}
+    >
+      {label}
+    </span>
+  );
+}
+
+/** The release diary: curated official schedule, honest about what's missing. */
+export function EconomicDiary({ today, limit }: { today: string; limit?: number }) {
+  const entries = [...DIARY]
+    .filter((e) => e.date >= today || e.actual)
+    .sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
+  const shown = limit ? entries.slice(0, limit) : entries;
+  const surprises = (["UK", "US", "EA"] as const).map((e) => surpriseIndex(DIARY, e));
+  const anySurprise = surprises.some((s) => s !== null);
+
   return (
     <section
       aria-label="The economic diary"
@@ -13,29 +49,53 @@ export function EconomicDiary() {
         <h3 className="coachline-under font-display text-[19px] font-[540] text-ink">
           The economic diary
         </h3>
-        <span className="caps !font-medium text-muted">today&rsquo;s releases</span>
+        <Link href="/diary" className="caps !font-medium text-muted hover:text-brg">
+          full diary →
+        </Link>
       </div>
 
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            {["Time", "Release", "Prior", "Cons.", "Result"].map((h, i) => (
+            {["Date", "Release", "Result"].map((h, i) => (
               <th
                 key={h}
-                className={`caps border-b border-line pb-2 !text-[9.5px] !font-bold text-muted ${i >= 2 ? "text-right" : "text-left"}`}
+                className={`caps border-b border-line pb-2 !text-[9.5px] !font-bold text-muted ${i === 2 ? "text-right" : "text-left"}`}
               >
                 {h}
               </th>
             ))}
           </tr>
         </thead>
+        <tbody>
+          {shown.map((entry) => (
+            <tr key={`${entry.date}${entry.name}`} className="border-b border-[#EAEBDF] last:border-b-0">
+              <td className="figures py-3 pr-2 text-xs font-semibold text-muted">
+                {new Date(`${entry.date}T12:00:00Z`).toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "short",
+                })}
+              </td>
+              <td className="py-3 pr-2 text-[13.5px]">
+                <span className="caps mr-2 !text-[9px] !font-bold text-brass">{entry.economy}</span>
+                {entry.name}
+              </td>
+              <td className="py-3 text-right">
+                <Pill entry={entry} today={today} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
 
-      <div className="mt-4 rounded-lg bg-sage px-4 py-6 text-center text-[13px] leading-relaxed text-muted">
-        The release schedule — ONS, BLS and ECB calendars with prior, consensus
-        and BEAT / MISS / DUE pills — arrives in Phase 5, alongside the
-        surprise index it feeds.
-      </div>
+      <p className="mt-3.5 border-t border-line pt-2.5 text-[11px] leading-relaxed text-muted">
+        Schedule curated {SCHEDULE_CURATED_AT} from ONS, BLS and central-bank
+        calendars. Consensus expectations are commercial data — omitted;
+        surprise direction scores against the prior print.{" "}
+        {anySurprise
+          ? `Surprise readings — UK ${surprises[0] ?? "–"} · US ${surprises[1] ?? "–"} · EA ${surprises[2] ?? "–"}.`
+          : "The surprise index begins once releases print against recorded priors."}
+      </p>
     </section>
   );
 }

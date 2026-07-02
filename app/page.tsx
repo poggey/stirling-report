@@ -20,7 +20,7 @@ import { getLatestEdition } from "@/lib/editions/store";
 import { getEditionSummaries } from "@/lib/editions/summaries";
 import { ukDateOf, type Edition } from "@/lib/editions/types";
 import { formatChange, formatUkDate } from "@/lib/format";
-import { getMarketData } from "@/lib/market-data";
+import { getMarketData, CURVE_ONLY_IDS, POLICY_IDS } from "@/lib/market-data";
 import { rankBySalience, salienceTable } from "@/lib/salience";
 import { buildStory } from "@/lib/story";
 import { readWeather, WEATHER_LABEL, WEATHER_SUB } from "@/lib/weather";
@@ -29,8 +29,8 @@ import { readWeather, WEATHER_LABEL, WEATHER_SUB } from "@/lib/weather";
 // source fetches inside are tagged with the same revalidation window.
 export const revalidate = 1800;
 
-// Presented inside the curve card rather than the market board.
-const CURVE_ONLY = new Set(["gilt20y"]);
+// Instruments that sit in the curve cards / Central Bank Watch, not the board.
+const OFF_BOARD = new Set([...CURVE_ONLY_IDS, ...POLICY_IDS]);
 
 export default async function Home() {
   const [{ instruments, fetchedAt }, latestEdition, summaries] = await Promise.all([
@@ -49,11 +49,11 @@ export default async function Home() {
     : 1;
 
   const withData = instruments.filter((i) => i.level !== null);
-  const ranked = rankBySalience(withData.filter((i) => !CURVE_ONLY.has(i.id)));
+  const ranked = rankBySalience(withData.filter((i) => !OFF_BOARD.has(i.id)));
   const ledger = ranked.slice(0, 4);
   const ledgerIds = new Set(ledger.map((i) => i.id));
   const board = instruments.filter(
-    (i) => !ledgerIds.has(i.id) && !CURVE_ONLY.has(i.id),
+    (i) => !ledgerIds.has(i.id) && !OFF_BOARD.has(i.id),
   );
 
   const story = buildStory(ranked);
@@ -77,7 +77,7 @@ export default async function Home() {
     generatedAt: fetchedAt,
     weather,
     story,
-    salience: salienceTable(instruments.filter((i) => !CURVE_ONLY.has(i.id))),
+    salience: salienceTable(instruments.filter((i) => !OFF_BOARD.has(i.id))),
     instruments,
     sources,
   };
@@ -141,11 +141,18 @@ export default async function Home() {
               fetchedAt={fetchedAt}
             />
           )}
-          <CentralBankWatch bankRate={byId("bankrate")} />
+          <CentralBankWatch
+            rates={
+              new Map(
+                instruments.filter((i) => POLICY_IDS.has(i.id)).map((i) => [i.id, i]),
+              )
+            }
+            today={today}
+          />
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-6 min-[960px]:grid-cols-[7fr_5fr]">
-          <EconomicDiary />
+          <EconomicDiary today={today} limit={5} />
           <NotesColumn date={now} />
         </div>
 

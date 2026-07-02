@@ -1,6 +1,7 @@
 import { dayChange, zScore, type ChangeMode } from "@/lib/compute";
 import { boe } from "@/lib/sources/boe";
 import { coingecko } from "@/lib/sources/coingecko";
+import { ecb } from "@/lib/sources/ecb";
 import { frankfurter } from "@/lib/sources/frankfurter";
 import { fred } from "@/lib/sources/fred";
 import { yahoo } from "@/lib/sources/yahoo";
@@ -20,7 +21,12 @@ export interface MarketData {
   fetchedAt: string;
 }
 
-const PROVIDERS: Provider[] = [frankfurter, coingecko, yahoo, boe, fred];
+const PROVIDERS: Provider[] = [frankfurter, coingecko, yahoo, boe, fred, ecb];
+
+/** Policy rates live in Central Bank Watch, curve-only tenors in the curve
+ * cards — neither belongs on the market board or in the story ranking. */
+export const POLICY_IDS = new Set(["bankrate", "fedtarget", "ecbdeposit"]);
+export const CURVE_ONLY_IDS = new Set(["gilt20y", "ust5y", "ust30y"]);
 
 export function changeMode(instrument: InstrumentSeries): ChangeMode {
   return instrument.class === "rate" ? "abs" : "pct";

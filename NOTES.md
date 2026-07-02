@@ -60,6 +60,25 @@ trusting anything below after a long gap.
   use the BoE yield-curve dataset (ZIP download) which has all tenors.
 - Bank Rate series repeats the same value daily; yields lag by one business day.
 
+## ECB Data Portal (euro-area policy rates — no key)
+
+- `data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.DFR.LEV?format=csvdata&lastNObservations=N`
+- CSV with ~40 columns; `TIME_PERIOD` and `OBS_VALUE` sit before any quoted
+  field, so index-based parsing of the leading cells is safe.
+- The deposit-facility series repeats daily between changes — good for
+  deriving "last change" honestly from the data.
+
+## Curated calendars (lib/central-banks.ts, lib/diary.ts)
+
+- Meeting dates and release dates are curated from the official calendars
+  (BoE, Fed, ECB, BLS, ONS) — see the `curated` stamps in each file. They are
+  published facts, but they DO go stale: re-verify when each institution
+  publishes its next calendar year, and after any rescheduling announcement.
+- bankofengland.co.uk and bls.gov 403 generic fetchers; search or use the
+  press-release pages instead.
+- Consensus expectations are commercial data (WHITEPAPER §13): the diary
+  omits them and scores surprise direction against the prior print only.
+
 ## FRED (US Treasury yields — key in FRED_API_KEY)
 
 - API: `/fred/series/observations?series_id=DGS2&api_key=…&file_type=json`

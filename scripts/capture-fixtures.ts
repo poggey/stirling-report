@@ -66,7 +66,7 @@ async function main() {
   // missing days "."). Re-verify against the real API once a key exists.
   const fg = await fetch("https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2,DGS10");
   const rows = (await fg.text()).trim().split("\n").slice(1); // drop header
-  const recent = rows.slice(-45).map((line) => line.split(","));
+  const recent = rows.slice(-420).map((line) => line.split(","));
   const toObs = (col: number) =>
     recent.map(([date, ...vals]) => ({
       realtime_start: date,
@@ -82,6 +82,26 @@ async function main() {
     "fred-dgs10.json",
     JSON.stringify({ units: "lin", observations: toObs(1) }, null, 2),
   );
+
+  // Additional FRED series for the curve page and Fed target (same recast).
+  for (const id of ["DGS5", "DGS30", "DFEDTARU"]) {
+    const res = await fetch(`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${id}`);
+    const seriesRows = (await res.text()).trim().split("\n").slice(1);
+    const obs = seriesRows.slice(-420).map((line) => {
+      const [date, val] = line.split(",");
+      return { realtime_start: date, realtime_end: date, date, value: val === "" ? "." : val };
+    });
+    await save(
+      `fred-${id.toLowerCase()}.json`,
+      JSON.stringify({ units: "lin", observations: obs }, null, 2),
+    );
+  }
+
+  // ECB Data Portal — deposit facility rate CSV (see probe-ecb.ts)
+  const ecb = await fetch(
+    "https://data-api.ecb.europa.eu/service/data/FM/D.U2.EUR.4F.KR.DFR.LEV?format=csvdata&lastNObservations=60",
+  );
+  await save("ecb-dfr.csv", (await ecb.text()).trim());
 }
 
 main();

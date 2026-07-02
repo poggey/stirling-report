@@ -5,8 +5,8 @@ import { formatShortDateTime } from "@/lib/format";
 const NAV: { label: string; href?: string }[] = [
   { label: "Today", href: "/" },
   { label: "Archive", href: "/archive" },
-  { label: "Curve" },
-  { label: "Diary" },
+  { label: "Curve", href: "/curve" },
+  { label: "Diary", href: "/diary" },
   { label: "Learn" },
 ];
 

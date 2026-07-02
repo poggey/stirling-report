@@ -1,12 +1,23 @@
+import { BANKS, lastRateChange, nextMeeting } from "@/lib/central-banks";
 import { formatLevel } from "@/lib/format";
 import type { MarketInstrument } from "@/lib/market-data";
 
-/**
- * Phase 1 shows the one policy rate we hold real data for (Bank Rate, BoE
- * IADB). Fed/ECB rows, decision countdowns and vote splits arrive with the
- * Phase 5 providers — shown here as honest placeholders, never invented.
- */
-export function CentralBankWatch({ bankRate }: { bankRate?: MarketInstrument }) {
+interface CentralBankWatchProps {
+  /** The three policy-rate instruments, keyed by id. */
+  rates: Map<string, MarketInstrument>;
+  /** Today's UK date, YYYY-MM-DD — countdowns are computed against it. */
+  today: string;
+}
+
+function fmtMeeting(date: string): string {
+  return new Date(`${date}T12:00:00Z`).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+  });
+}
+
+/** Live policy rates from BoE/FRED/ECB with real decision countdowns. */
+export function CentralBankWatch({ rates, today }: CentralBankWatchProps) {
   return (
     <section
       aria-label="Central bank watch"
@@ -16,38 +27,49 @@ export function CentralBankWatch({ bankRate }: { bankRate?: MarketInstrument }) 
         <h3 className="coachline-under font-display text-[19px] font-[540] text-ink">
           Central bank watch
         </h3>
-        <span className="caps !font-medium text-muted">policy rates</span>
+        <span className="caps !font-medium text-muted">next decisions</span>
       </div>
 
-      <div className="flex items-center justify-between border-b border-line py-3.5">
-        <div>
-          <div className="text-[14.5px] font-semibold">Bank of England</div>
-          <div className="text-xs text-muted">
-            Bank Rate ·{" "}
-            {bankRate && bankRate.health.status !== "down"
-              ? `as of ${bankRate.health.asOf}`
-              : "unavailable"}
+      {BANKS.map((bank) => {
+        const rate = rates.get(bank.id);
+        const change = rate ? lastRateChange(rate) : null;
+        const meeting = nextMeeting(bank.meetings, today);
+        const down = !rate || rate.health.status === "down";
+        return (
+          <div
+            key={bank.id}
+            className="flex items-center justify-between gap-3 border-b border-line py-3.5 last:border-b-0"
+          >
+            <div>
+              <div className="text-[14.5px] font-semibold">{bank.name}</div>
+              <div className="text-xs text-muted">
+                {down
+                  ? `rate source unavailable`
+                  : change
+                    ? `Last: ${change.deltaBp > 0 ? "+" : ""}${change.deltaBp}bp on ${fmtMeeting(change.date)}`
+                    : `Unchanged across the stored window`}
+                {rate?.health.status === "stale" && " · stale"}
+              </div>
+            </div>
+            <div className="text-right">
+              <div className="figures text-[19px] font-bold">
+                {rate ? formatLevel(rate) : "—"}
+              </div>
+              {meeting && (
+                <div className="caps mt-px !text-[9.5px] !font-bold !tracking-[0.1em] text-brass">
+                  {bank.body} in {meeting.daysAway} day{meeting.daysAway === 1 ? "" : "s"}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="figures text-right text-[19px] font-bold">
-          {bankRate ? formatLevel(bankRate) : "—"}
-        </div>
-      </div>
+        );
+      })}
 
-      {["Federal Reserve", "European Central Bank"].map((bank) => (
-        <div key={bank} className="flex items-center justify-between border-b border-line py-3.5 last:border-b-0">
-          <div>
-            <div className="text-[14.5px] font-semibold text-muted">{bank}</div>
-            <div className="text-xs text-muted">provider arrives in Phase 5</div>
-          </div>
-          <div className="text-right text-[19px] font-bold text-line">—</div>
-        </div>
-      ))}
-
-      <div className="mt-4 rounded-lg bg-sage px-4 py-3 text-xs leading-relaxed text-muted">
-        Decision countdowns, vote splits and the market-implied path join in
-        Phase 5 — no numbers shown here until they are real.
-      </div>
+      <p className="mt-3.5 border-t border-line pt-2.5 text-[11px] text-muted">
+        Rates: Bank of England IADB · FRED · ECB Data Portal. Meeting dates
+        from each institution&rsquo;s published calendar. Vote splits and the
+        market-implied path are future work.
+      </p>
     </section>
   );
 }

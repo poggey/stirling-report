@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-ivory-0 text-ink font-sans antialiased;
+  }
+
+  /* Every figure aligns to the decimal — WHITEPAPER §8.3 */
+  .figures {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* Accessibility floor: visible focus everywhere */
+  :focus-visible {
+    outline: 2px solid #1e5c43;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  /* Chart lines draw in once on first view (400–600ms ease-out) */
+  @keyframes draw-in {
+    from {
+      stroke-dashoffset: var(--draw-length, 300);
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .animate-draw {
+    stroke-dasharray: var(--draw-length, 300);
+    animation: draw-in 500ms ease-out forwards;
+  }
+
+  @keyframes settle-up {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-settle {
+    animation: settle-up 400ms ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-draw,
+    .animate-settle {
+      animation: none;
+      stroke-dasharray: none;
+    }
+  }
+}

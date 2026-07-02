@@ -68,6 +68,18 @@ trusting anything below after a long gap.
 - The deposit-facility series repeats daily between changes — good for
   deriving "last change" honestly from the data.
 
+## Vercel cron (vercel.json)
+
+- Hobby-tier crons fire at some point WITHIN THE HOUR after the scheduled
+  minute, not exactly on it. The snapshot is scheduled at 21:05 UTC so that
+  even a maximal delay stays inside the same UK calendar day in BST
+  (22:05 UTC + 55min would cross UK midnight and stamp tomorrow's date).
+- Vercel sends `Authorization: Bearer $CRON_SECRET` automatically when an
+  env var with that exact name exists on the project.
+- Without BLOB_READ_WRITE_TOKEN the store falls back to the repo's /data
+  folder, which is read-only on Vercel — the cron will 500. A Blob store is
+  required in production.
+
 ## Curated calendars (lib/central-banks.ts, lib/diary.ts)
 
 - Meeting dates and release dates are curated from the official calendars

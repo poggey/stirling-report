@@ -10,9 +10,11 @@ interface HeaderBarProps {
   petals: number;
   storm?: boolean;
   date: Date;
+  /** The primary action — the client IssueButton once Phase 3 wires it. */
+  issueSlot?: React.ReactNode;
 }
 
-export function HeaderBar({ weather, weatherSub, petals, storm, date }: HeaderBarProps) {
+export function HeaderBar({ weather, weatherSub, petals, storm, date, issueSlot }: HeaderBarProps) {
   return (
     <header
       className="sticky top-0 z-40 border-b border-line border-t-[3px] border-t-brg bg-ivory-0/90 backdrop-blur-[10px]"
@@ -64,14 +66,16 @@ export function HeaderBar({ weather, weatherSub, petals, storm, date }: HeaderBa
             </span>
           </span>
 
-          <button
-            type="button"
-            disabled
-            title="Phase 3"
-            className="whitespace-nowrap rounded-[10px] bg-brg px-3 py-[11px] text-[13px] font-semibold text-cream opacity-60 sm:px-5"
-          >
-            Issue today&rsquo;s report
-          </button>
+          {issueSlot ?? (
+            <button
+              type="button"
+              disabled
+              title="Phase 3"
+              className="whitespace-nowrap rounded-[10px] bg-brg px-3 py-[11px] text-[13px] font-semibold text-cream opacity-60 sm:px-5"
+            >
+              Issue today&rsquo;s report
+            </button>
+          )}
         </div>
       </div>
     </header>

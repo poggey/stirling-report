@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { buildBriefings } from "@/lib/briefing/gemini";
 import { buildEdition } from "@/lib/editions/build";
 import { getEdition, putEdition } from "@/lib/editions/store";
 import { ukDateOf } from "@/lib/editions/types";
@@ -35,6 +36,7 @@ export async function GET(req: NextRequest) {
   }
 
   const edition = await buildEdition();
+  edition.briefings = await buildBriefings(edition);
   const down = edition.instruments.filter((i) => i.health.status === "down");
   const { stored } = await putEdition(edition);
 
@@ -43,6 +45,7 @@ export async function GET(req: NextRequest) {
     date: edition.date,
     number: edition.number,
     stored,
+    ai: edition.briefings.ai,
     weather: edition.weather.state,
     headline: `${edition.story.headlinePlain}${edition.story.headlineEm ? ` ${edition.story.headlineEm}` : ""}`,
     degraded: down.map((i) => ({ id: i.id, reason: i.health.status === "down" ? i.health.reason : "" })),

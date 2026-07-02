@@ -9,10 +9,18 @@ import { petalsFromZ } from "@/components/Medallion";
 import { NotesColumn } from "@/components/NotesColumn";
 import { StatRow } from "@/components/StatRow";
 import { StoryOfTheDay } from "@/components/StoryOfTheDay";
+import {
+  IssueButton,
+  ReportProvider,
+  ReportSheet,
+  type ReportPayload,
+} from "@/components/report/ReportSheet";
+import { templateBriefing } from "@/lib/briefing/template";
 import { getLatestEdition } from "@/lib/editions/store";
-import { ukDateOf } from "@/lib/editions/types";
+import { ukDateOf, type Edition } from "@/lib/editions/types";
+import { formatChange, formatUkDate } from "@/lib/format";
 import { getMarketData } from "@/lib/market-data";
-import { rankBySalience } from "@/lib/salience";
+import { rankBySalience, salienceTable } from "@/lib/salience";
 import { buildStory } from "@/lib/story";
 import { readWeather, WEATHER_LABEL, WEATHER_SUB } from "@/lib/weather";
 
@@ -56,15 +64,56 @@ export default async function Home() {
   const sources = [...new Set(instruments.map((i) => i.source))];
   const now = new Date();
 
+  // The report sheet serves today's cached edition when the 22:05 snapshot
+  // has run; before that it issues an honestly-labelled intraday edition
+  // built from the same deterministic engine (WHITEPAPER §4.1).
+  const issuedToday = latestEdition?.date === today ? latestEdition : null;
+  const reportSource: Edition = issuedToday ?? {
+    schema: 1,
+    date: today,
+    number: edition,
+    generatedAt: fetchedAt,
+    weather,
+    story,
+    salience: salienceTable(instruments.filter((i) => !CURVE_ONLY.has(i.id))),
+    instruments,
+    sources,
+  };
+  const reportStory = reportSource.story;
+  const reportPayload: ReportPayload = {
+    dateLabel: formatUkDate(now),
+    edition: reportSource.number,
+    weatherLabel: WEATHER_LABEL[reportSource.weather.state],
+    petals: petalsFromZ(reportSource.weather.intensity),
+    storm: reportSource.weather.state === "storm",
+    headline: `${reportStory.headlinePlain}${reportStory.headlineEm ? ` ${reportStory.headlineEm}` : ""}`,
+    intraday: !issuedToday,
+    asOf: new Date(reportSource.generatedAt).toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+    stats: reportSource.salience.slice(0, 4).map((s) => {
+      const i = reportSource.instruments.find((x) => x.id === s.id)!;
+      const c = formatChange(i);
+      return { label: i.label, text: `${c.glyph} ${c.text}`, tone: c.tone };
+    }),
+    briefings: reportSource.briefings ?? {
+      template: templateBriefing(reportSource),
+      ai: false,
+    },
+  };
+
   return (
-    <>
+    <ReportProvider>
       <HeaderBar
         weather={WEATHER_LABEL[weather.state]}
         weatherSub={WEATHER_SUB[weather.state]}
         petals={petalsFromZ(weather.intensity)}
         storm={weather.state === "storm"}
         date={now}
+        issueSlot={<IssueButton />}
       />
+      <ReportSheet payload={reportPayload} />
 
       <main className="mx-auto max-w-[1200px] px-4 sm:px-7">
         <div className="mt-[30px] grid grid-cols-1 gap-6 min-[960px]:grid-cols-[7.2fr_4.8fr]">
@@ -102,6 +151,6 @@ export default async function Home() {
 
         <FooterBand edition={edition} sources={sources} fetchedAt={fetchedAt} />
       </main>
-    </>
+    </ReportProvider>
   );
 }

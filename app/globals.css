@@ -81,3 +81,27 @@
     }
   }
 }
+
+/* Print: the report sheet becomes the page (WHITEPAPER §9.2) */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #report-sheet,
+  #report-sheet * {
+    visibility: visible;
+  }
+  #report-sheet {
+    position: absolute !important;
+    inset: 0 auto auto 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  #report-sheet[aria-hidden="true"] {
+    display: none;
+  }
+}

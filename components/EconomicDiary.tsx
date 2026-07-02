@@ -54,7 +54,7 @@ export function EconomicDiary({ today, limit }: { today: string; limit?: number 
         </Link>
       </div>
 
-      <table className="w-full border-collapse font-narrow">
+      <table className="w-full border-collapse">
         <thead>
           <tr>
             {(["Date", "Release", "Prior", "Exp.", "Result"] as const).map((h, i) => (

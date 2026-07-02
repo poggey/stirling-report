@@ -1,5 +1,6 @@
 import { LearnToggle } from "./learn/LearnProvider";
 import { Medallion } from "./Medallion";
+import { MobileMenu } from "./MobileMenu";
 import { NavLinks } from "./NavLinks";
 import { formatShortDateTime } from "@/lib/format";
 
@@ -19,14 +20,16 @@ export function HeaderBar({ weather, weatherSub, petals, storm, date, issueSlot 
       className="sticky top-0 z-40 border-b border-line border-t-[3px] border-t-brg bg-ivory-0/90 backdrop-blur-[10px]"
       style={{ boxShadow: "inset 0 1px 0 #A9853F" }}
     >
-      <div className="mx-auto flex min-h-[66px] max-w-[1200px] flex-wrap items-center gap-x-6 gap-y-2 px-4 py-2 min-[960px]:py-0 sm:px-7 lg:gap-x-[34px]">
+      <div className="relative mx-auto flex min-h-[66px] max-w-[1200px] items-center gap-x-3 px-4 py-2 min-[960px]:py-0 sm:px-7 min-[960px]:gap-x-[34px]">
+        <MobileMenu date={formatShortDateTime(date)} />
+
         <p className="font-display text-2xl font-semibold tracking-[0.05em] text-brg">
           Stirling<span className="not-italic text-brass">.</span>
         </p>
 
         <NavLinks />
 
-        <div className="ml-auto flex flex-wrap items-center justify-end gap-3 sm:gap-4">
+        <div className="ml-auto flex items-center justify-end gap-2 min-[430px]:gap-3 sm:gap-4">
           <time
             dateTime={date.toISOString()}
             className="hidden text-xs font-medium text-muted min-[960px]:block"
@@ -38,9 +41,12 @@ export function HeaderBar({ weather, weatherSub, petals, storm, date, issueSlot 
             <LearnToggle />
           </span>
 
-          <span className="flex items-center gap-2 rounded-full border border-line bg-ivory-1 py-1.5 pl-2 pr-3.5">
+          <span
+            className="flex items-center gap-2 rounded-full border border-line bg-ivory-1 py-1.5 pl-2 pr-2 min-[430px]:pr-3.5"
+            title={`${weather} · ${weatherSub}`}
+          >
             <Medallion petals={petals} storm={storm} size={22} />
-            <span className="leading-tight">
+            <span className="hidden leading-tight min-[430px]:block">
               <span className="block text-[11px] font-bold tracking-[0.07em] text-brg">
                 {weather.toUpperCase()}
               </span>

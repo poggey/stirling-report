@@ -155,6 +155,24 @@ export function LearnChip({ slug, children }: { slug: string; children: React.Re
   );
 }
 
+// A match only counts at word boundaries: letters may not touch either end,
+// so "GBP" never triggers the "bp" chip and "warms" never triggers a term.
+// Digits are deliberately allowed to touch ("5.3σ", "11bp" must still chip).
+const isLetter = (ch: string | undefined) => ch !== undefined && /[a-z]/i.test(ch);
+
+function findWholeWord(haystackLower: string, needle: string): number {
+  let from = 0;
+  while (from <= haystackLower.length - needle.length) {
+    const index = haystackLower.indexOf(needle, from);
+    if (index === -1) return -1;
+    const before = haystackLower[index - 1];
+    const after = haystackLower[index + needle.length];
+    if (!isLetter(before) && !isLetter(after)) return index;
+    from = index + 1;
+  }
+  return -1;
+}
+
 /** Wraps the first occurrence of each glossary term in `text` with a chip. */
 export function Chipped({ text }: { text: string }) {
   const { enabled } = useLearn();
@@ -174,7 +192,7 @@ export function Chipped({ text }: { text: string }) {
     const lower = rest.toLowerCase();
     for (const { m, slug } of matchers) {
       if (used.has(slug)) continue;
-      const index = lower.indexOf(m);
+      const index = findWholeWord(lower, m);
       if (index !== -1 && (best === null || index < best.index)) {
         best = { index, length: m.length, slug };
       }

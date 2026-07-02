@@ -60,7 +60,7 @@ export function ReportProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function IssueButton({ label = "Issue today’s report" }: { label?: string }) {
+export function IssueButton({ label }: { label?: string }) {
   const { setOpen } = useContext(ReportContext);
   return (
     <button
@@ -68,7 +68,11 @@ export function IssueButton({ label = "Issue today’s report" }: { label?: stri
       onClick={() => setOpen(true)}
       className="whitespace-nowrap rounded-[10px] bg-brg px-3 py-[11px] text-[13px] font-semibold text-cream transition-colors hover:bg-brg-600 active:translate-y-px sm:px-5"
     >
-      {label}
+      {label ?? (
+        <>
+          Issue<span className="hidden min-[430px]:inline"> today&rsquo;s</span> report
+        </>
+      )}
     </button>
   );
 }

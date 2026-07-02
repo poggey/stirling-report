@@ -1,0 +1,117 @@
+- generic [active] [ref=f49e1]:
+  - banner [ref=f49e2]:
+    - generic [ref=f49e3]:
+      - paragraph [ref=f49e4]: Stirling.
+      - navigation "Primary" [ref=f49e5]:
+        - link "Today" [ref=f49e6] [cursor=pointer]:
+          - /url: /
+        - link "Archive" [ref=f49e7] [cursor=pointer]:
+          - /url: /archive
+        - link "Curve" [ref=f49e8] [cursor=pointer]:
+          - /url: /curve
+        - link "Diary" [ref=f49e9] [cursor=pointer]:
+          - /url: /diary
+        - link "Learn" [ref=f49e10] [cursor=pointer]:
+          - /url: /learn
+      - generic [ref=f49e11]:
+        - time [ref=f49e12]: Thu, 2 Jul 2026 · 22:47
+        - button "Learn off" [ref=f49e14] [cursor=pointer]
+        - generic "Clear · risk-on" [ref=f49e15]:
+          - img "Medallion" [ref=f49e16]
+          - generic [ref=f49e46]:
+            - generic [ref=f49e47]: CLEAR
+            - generic [ref=f49e48]: risk-on
+        - button "Issue today’s report" [ref=f49e49] [cursor=pointer]
+  - dialog [ref=f49e50]:
+    - generic [ref=f49e51]:
+      - generic [ref=f49e52]:
+        - generic [ref=f49e53]: The daily briefing · Desk note
+        - heading [level=2] [ref=f49e54]: USD/JPY slumps 0.69% as FTSE 100 surges 1.67%
+        - generic [ref=f49e55]: Thursday, 2 July 2026 · Edition Nº 1 · Clear
+      - img [ref=f49e57]
+      - button [ref=f49e86] [cursor=pointer]: ✕
+    - generic [ref=f49e87]:
+      - tablist [ref=f49e88]:
+        - tab [selected] [ref=f49e89] [cursor=pointer]: Desk note
+        - tab [ref=f49e90] [cursor=pointer]: Plain English
+        - tab [ref=f49e91] [cursor=pointer]: Study mode
+        - tab [ref=f49e92] [cursor=pointer]: Template
+      - generic [ref=f49e93]:
+        - generic [ref=f49e94]: USD/JPY ▼ 0.69%
+        - generic [ref=f49e95]: FTSE 100 ▲ 1.67%
+        - generic [ref=f49e96]: EUR/GBP ▼ 0.36%
+        - generic [ref=f49e97]: US 30y Treasury ▲ 6.0bp
+      - paragraph [ref=f49e98]: USD/JPY saw the most significant move, declining by 0.69% on the day, a 5.3σ event against its trailing month. This was the most unusual print across the board. The FTSE 100 also posted a notable gain, rising 1.67% (2.9σ).
+      - paragraph [ref=f49e99]: EUR/GBP followed with a 0.36% decline, representing a 2.4σ move. Elsewhere, US 30y Treasury yields increased by 0.06%, while UK 20y Gilt yields rose by 0.05%.
+      - paragraph [ref=f49e100]: Cryptocurrencies also saw strong performance, with Ethereum up 8.50% and Bitcoin gaining 5.08%. GBP/USD strengthened by 0.50%.
+      - generic [ref=f49e101]:
+        - generic [ref=f49e102]: What to watch tomorrow
+        - list [ref=f49e103]:
+          - listitem [ref=f49e104]: The ongoing geopolitical situation following reports of a "most massive" Russian attack on Kyiv.
+          - listitem [ref=f49e105]: Any further statements from the Federal Reserve Board regarding enforcement actions, after today's announcements concerning Small Business Bank and others.
+          - listitem [ref=f49e106]: Developments related to the ECB's focus on the digital transformation of money, payments, and finance, as discussed by Piero Cipollone.
+      - generic [ref=f49e107]: AI-generated · every figure from the day's snapshot
+  - main [ref=f49e108]:
+    - generic [ref=f49e109]:
+      - paragraph [ref=f49e110]: The Yield Curve Observatory
+      - heading "The curve" [level=1] [ref=f49e112]
+      - paragraph [ref=f49e113]: Today’s UK gilt and US Treasury curves against their shapes one month and one year ago. An inverted curve — short yields above long — has preceded every US recession of the past half-century, which is why the 2s10s spread is the most-watched signal in markets.
+    - generic [ref=f49e114]:
+      - region "UK gilts" [ref=f49e115]:
+        - generic [ref=f49e116]:
+          - heading "UK gilts" [level=3] [ref=f49e117]
+          - generic [ref=f49e118]: Bank of England IADB
+        - img "5 year 4.28%, 10 year 4.74%, 20 year 5.26%" [ref=f49e119]:
+          - generic [ref=f49e124]:
+            - generic [ref=f49e126]: 4.28%
+            - generic [ref=f49e127]: 5Y
+          - generic [ref=f49e128]:
+            - generic [ref=f49e130]: 4.74%
+            - generic [ref=f49e131]: 10Y
+          - generic [ref=f49e132]:
+            - generic [ref=f49e134]: 5.26%
+            - generic [ref=f49e135]: 20Y
+        - generic [ref=f49e138]:
+          - generic [ref=f49e139]: Today
+          - generic [ref=f49e141]: One month ago
+          - generic [ref=f49e143]: One year ago
+        - paragraph [ref=f49e145]: Nominal par yields · no 2Y IADB series · Bank of England IADB · as of 2026-06-30 · fetched 22:47
+      - region "US Treasuries" [ref=f49e146]:
+        - generic [ref=f49e147]:
+          - heading "US Treasuries" [level=3] [ref=f49e148]
+          - generic [ref=f49e149]: FRED (St. Louis Fed)
+        - img "2 year 4.17%, 5 year 4.24%, 10 year 4.48%, 30 year 4.97%" [ref=f49e150]:
+          - generic [ref=f49e155]:
+            - generic [ref=f49e157]: 4.17%
+            - generic [ref=f49e158]: 2Y
+          - generic [ref=f49e159]:
+            - generic [ref=f49e161]: 4.24%
+            - generic [ref=f49e162]: 5Y
+          - generic [ref=f49e163]:
+            - generic [ref=f49e165]: 4.48%
+            - generic [ref=f49e166]: 10Y
+          - generic [ref=f49e167]:
+            - generic [ref=f49e169]: 4.97%
+            - generic [ref=f49e170]: 30Y
+        - generic [ref=f49e173]:
+          - generic [ref=f49e174]: Today
+          - generic [ref=f49e176]: One month ago
+          - generic [ref=f49e178]: One year ago
+        - paragraph [ref=f49e180]: Constant-maturity yields · FRED (St. Louis Fed) · as of 2026-07-01 · fetched 22:47
+    - generic [ref=f49e181]:
+      - generic [ref=f49e182]:
+        - generic [ref=f49e183]: UK 5s10s spread
+        - generic [ref=f49e184]:
+          - generic [ref=f49e185]: +46bp
+          - generic [ref=f49e186]: +1bp steeper today
+          - generic [ref=f49e187]: Not inverted
+        - paragraph [ref=f49e188]: The gilt curve's slope between five and ten years. The classic UK signal is 2s10s, but the IADB publishes no 2-year par yield — the 5-year stands in, honestly labelled.
+      - generic [ref=f49e189]:
+        - generic [ref=f49e190]: US 2s10s spread
+        - generic [ref=f49e191]:
+          - generic [ref=f49e192]: +31bp
+          - generic [ref=f49e193]: +1bp steeper today
+          - generic [ref=f49e194]: Not inverted
+        - paragraph [ref=f49e195]: "The most-watched recession signal in markets: when two-year Treasuries out-yield tens, policy is restrictive relative to long-run growth expectations. Inversions have preceded US recessions with long and variable lags."
+  - button "Open Next.js Dev Tools" [ref=f49e201] [cursor=pointer]:
+    - img [ref=f49e202]

@@ -1,0 +1,490 @@
+- generic [active] [ref=f51e1]:
+  - banner [ref=f51e2]:
+    - generic [ref=f51e3]:
+      - button "Open menu" [ref=f51e5] [cursor=pointer]
+      - paragraph [ref=f51e9]: Stirling.
+      - generic [ref=f51e10]:
+        - generic "Clear · risk-on" [ref=f51e11]:
+          - img "Medallion" [ref=f51e12]
+        - button "Issue report" [ref=f51e42] [cursor=pointer]
+  - dialog [ref=f51e43]:
+    - generic [ref=f51e44]:
+      - generic [ref=f51e45]:
+        - generic [ref=f51e46]: The daily briefing · Desk note
+        - heading [level=2] [ref=f51e47]: USD/JPY slumps 0.69% as FTSE 100 surges 1.67%
+        - generic [ref=f51e48]: Thursday, 2 July 2026 · Edition Nº 1 · Clear
+      - button [ref=f51e49] [cursor=pointer]: ✕
+    - generic [ref=f51e50]:
+      - tablist [ref=f51e51]:
+        - tab [selected] [ref=f51e52] [cursor=pointer]: Desk note
+        - tab [ref=f51e53] [cursor=pointer]: Plain English
+        - tab [ref=f51e54] [cursor=pointer]: Study mode
+        - tab [ref=f51e55] [cursor=pointer]: Template
+      - generic [ref=f51e56]:
+        - generic [ref=f51e57]: USD/JPY ▼ 0.69%
+        - generic [ref=f51e58]: FTSE 100 ▲ 1.67%
+        - generic [ref=f51e59]: EUR/GBP ▼ 0.36%
+        - generic [ref=f51e60]: US 30y Treasury ▲ 6.0bp
+      - paragraph [ref=f51e61]: USD/JPY saw the most significant move, declining by 0.69% on the day, a 5.3σ event against its trailing month. This was the most unusual print across the board. The FTSE 100 also posted a notable gain, rising 1.67% (2.9σ).
+      - paragraph [ref=f51e62]: EUR/GBP followed with a 0.36% decline, representing a 2.4σ move. Elsewhere, US 30y Treasury yields increased by 0.06%, while UK 20y Gilt yields rose by 0.05%.
+      - paragraph [ref=f51e63]: Cryptocurrencies also saw strong performance, with Ethereum up 8.50% and Bitcoin gaining 5.08%. GBP/USD strengthened by 0.50%.
+      - generic [ref=f51e64]:
+        - generic [ref=f51e65]: What to watch tomorrow
+        - list [ref=f51e66]:
+          - listitem [ref=f51e67]: The ongoing geopolitical situation following reports of a "most massive" Russian attack on Kyiv.
+          - listitem [ref=f51e68]: Any further statements from the Federal Reserve Board regarding enforcement actions, after today's announcements concerning Small Business Bank and others.
+          - listitem [ref=f51e69]: Developments related to the ECB's focus on the digital transformation of money, payments, and finance, as discussed by Piero Cipollone.
+      - generic [ref=f51e70]: AI-generated · every figure from the day's snapshot
+  - main [ref=f51e71]:
+    - generic [ref=f51e72]:
+      - article [ref=f51e73]:
+        - generic "Edition number — one issued per day, archived forever" [ref=f51e74]:
+          - generic [ref=f51e75]: "1"
+          - generic [ref=f51e76]: EDITION
+        - paragraph [ref=f51e77]: Currencies & Equities · today's session
+        - heading "USD/JPY slumps 0.69% as FTSE 100 surges 1.67%" [level=1] [ref=f51e79]
+        - paragraph [ref=f51e80]: USD/JPY moved ▼ 0.69% on the day — 5.3σ against its trailing month, the board's most unusual print. FTSE 100 followed at ▲ 1.67% (2.9σ), with EUR/GBP ▼ 0.36% behind it. The rest of the board was quieter.
+        - generic [ref=f51e81]:
+          - generic [ref=f51e82]:
+            - term [ref=f51e83]: Top move
+            - definition [ref=f51e84]: 5.3σ
+          - generic [ref=f51e85]:
+            - term [ref=f51e86]: Edition
+            - definition [ref=f51e87]: Nº 1
+          - generic [ref=f51e88]:
+            - term [ref=f51e89]: Coverage
+            - definition [ref=f51e90]: 21 instruments · 6 sources
+          - generic [ref=f51e91]:
+            - term [ref=f51e92]: Snapshot
+            - definition [ref=f51e93]: 22:48
+          - generic [ref=f51e94]:
+            - term [ref=f51e95]: Headline method
+            - definition [ref=f51e96]: Ranked deterministically · phrased by AI from the wires
+        - list [ref=f51e97]:
+          - listitem [ref=f51e98]:
+            - generic [ref=f51e99]: Second
+            - text: FTSE 100 surges — ▲ 1.67% on the day, 2.9σ against its trailing month
+          - listitem [ref=f51e100]:
+            - generic [ref=f51e101]: Third
+            - text: EUR/GBP slides — ▼ 0.36% on the day, 2.4σ against its trailing month
+      - complementary "Today's Ledger — the day's most unusual moves" [ref=f51e102]:
+        - generic [ref=f51e103]:
+          - heading "Today’s ledger" [level=2] [ref=f51e104]
+          - generic [ref=f51e105]: highest salience
+        - generic [ref=f51e106]:
+          - generic [ref=f51e107]:
+            - generic [ref=f51e108]:
+              - paragraph [ref=f51e109]: USD/JPY
+              - paragraph [ref=f51e110]: 5.3σ vs its month
+            - generic [ref=f51e111]:
+              - paragraph [ref=f51e112]: "161.5800"
+              - img [ref=f51e114]
+              - paragraph [ref=f51e116]:
+                - text: ▼
+                - generic [ref=f51e117]: down
+                - text: 0.69%
+          - generic [ref=f51e118]:
+            - generic [ref=f51e119]:
+              - paragraph [ref=f51e120]: FTSE 100
+              - paragraph [ref=f51e121]: 2.9σ vs its month
+            - generic [ref=f51e122]:
+              - paragraph [ref=f51e123]: 10,652.9
+              - img [ref=f51e125]
+              - paragraph [ref=f51e127]:
+                - text: ▲
+                - generic [ref=f51e128]: up
+                - text: 1.67%
+          - generic [ref=f51e129]:
+            - paragraph [ref=f51e131]: EUR/GBP
+            - generic [ref=f51e132]:
+              - paragraph [ref=f51e133]: "0.8567"
+              - img [ref=f51e135]
+              - paragraph [ref=f51e137]:
+                - text: ▼
+                - generic [ref=f51e138]: down
+                - text: 0.36%
+          - generic [ref=f51e139]:
+            - paragraph [ref=f51e141]: GBP/USD
+            - generic [ref=f51e142]:
+              - paragraph [ref=f51e143]: "1.3306"
+              - img [ref=f51e145]
+              - paragraph [ref=f51e147]:
+                - text: ▲
+                - generic [ref=f51e148]: up
+                - text: 0.50%
+    - region "On the wires — headlines from official sources" [ref=f51e149]:
+      - generic [ref=f51e150]:
+        - heading "On the wires" [level=3] [ref=f51e151]
+        - generic [ref=f51e152]: BBC · BoE · Fed · ECB · refreshes every 30 min
+      - list [ref=f51e153]:
+        - listitem [ref=f51e154]:
+          - link "Leading BBC World · 21:18 'Most massive' Russian attack on Kyiv kills at least 27" [ref=f51e155] [cursor=pointer]:
+            - /url: https://www.bbc.co.uk/news/articles/c4gyv05gk4do?at_medium=RSS&at_campaign=rss
+            - generic [ref=f51e156]:
+              - generic [ref=f51e157]: Leading
+              - generic [ref=f51e158]: BBC World · 21:18
+            - generic [ref=f51e159]: "'Most massive' Russian attack on Kyiv kills at least 27"
+        - listitem [ref=f51e160]:
+          - link "Leading Federal Reserve · 16:00 Federal Reserve Board issues enforcement action with Small Business Bank and announces termination enforcement actions with BNP Paribas S.A., BNP Paribas USA, Inc., BNP Paribas Securities Corp., and Community Bankshares, Inc." [ref=f51e161] [cursor=pointer]:
+            - /url: https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260702a.htm
+            - generic [ref=f51e162]:
+              - generic [ref=f51e163]: Leading
+              - generic [ref=f51e164]: Federal Reserve · 16:00
+            - generic [ref=f51e165]: Federal Reserve Board issues enforcement action with Small Business Bank and announces termination enforcement actions with BNP Paribas S.A., BNP Paribas USA, Inc., BNP Paribas Securities Corp., and Community Bankshares, Inc.
+        - listitem [ref=f51e166]:
+          - 'link "Leading BBC World · 13:37 Watch: BBC at site of deadly Russian attack on Kyiv flats" [ref=f51e167] [cursor=pointer]':
+            - /url: https://www.bbc.co.uk/news/videos/c33yl1l8dkro?at_medium=RSS&at_campaign=rss
+            - generic [ref=f51e168]:
+              - generic [ref=f51e169]: Leading
+              - generic [ref=f51e170]: BBC World · 13:37
+            - generic [ref=f51e171]: "Watch: BBC at site of deadly Russian attack on Kyiv flats"
+      - paragraph [ref=f51e172]: Just published
+      - list [ref=f51e173]:
+        - listitem [ref=f51e174]:
+          - link "22:21 Ebola treatments trial begins in the Democratic Republic of Congo" [ref=f51e175] [cursor=pointer]:
+            - /url: https://www.bbc.co.uk/news/articles/c75ykve4zzxo?at_medium=RSS&at_campaign=rss
+            - generic [ref=f51e176]: 22:21
+            - generic [ref=f51e177]: Ebola treatments trial begins in the Democratic Republic of Congo
+        - listitem [ref=f51e178]:
+          - 'link "22:00 Christine Lagarde: Interview with Les Échos" [ref=f51e179] [cursor=pointer]':
+            - /url: https://www.ecb.europa.eu//press/inter/date/2026/html/ecb.in260702~c56db179c3.en.html
+            - generic [ref=f51e180]: 22:00
+            - generic [ref=f51e181]: "Christine Lagarde: Interview with Les Échos"
+        - listitem [ref=f51e182]:
+          - link "21:49 Pubs allowed to stay open until 5am for England Mexico match" [ref=f51e183] [cursor=pointer]:
+            - /url: https://www.bbc.co.uk/news/articles/c1kyr8747m9o?at_medium=RSS&at_campaign=rss
+            - generic [ref=f51e184]: 21:49
+            - generic [ref=f51e185]: Pubs allowed to stay open until 5am for England Mexico match
+        - listitem [ref=f51e186]:
+          - link "21:34 Former Olympian indicted for allegedly vandalising Washington Reflecting Pool" [ref=f51e187] [cursor=pointer]:
+            - /url: https://www.bbc.co.uk/news/articles/c2ky3p9jlveo?at_medium=RSS&at_campaign=rss
+            - generic [ref=f51e188]: 21:34
+            - generic [ref=f51e189]: Former Olympian indicted for allegedly vandalising Washington Reflecting Pool
+        - listitem [ref=f51e190]:
+          - link "21:34 Goat and skin in millions of 'lamb' kebabs compared to horsemeat lasagne scandal" [ref=f51e191] [cursor=pointer]:
+            - /url: https://www.bbc.co.uk/news/articles/ce95y1zlzyxo?at_medium=RSS&at_campaign=rss
+            - generic [ref=f51e192]: 21:34
+            - generic [ref=f51e193]: Goat and skin in millions of 'lamb' kebabs compared to horsemeat lasagne scandal
+        - listitem [ref=f51e194]:
+          - link "19:43 Killers of British couple in South Africa sentenced to life" [ref=f51e195] [cursor=pointer]:
+            - /url: https://www.bbc.co.uk/news/articles/cvgm49j9692o?at_medium=RSS&at_campaign=rss
+            - generic [ref=f51e196]: 19:43
+            - generic [ref=f51e197]: Killers of British couple in South Africa sentenced to life
+      - paragraph [ref=f51e198]: Headlines only, from official feeds, always linked to source. Leading stories are every headline above an auditable salience threshold (keyword tier × source × recency half-life) — several big stories all surface, and none is buried by later trivia. The wires give the numbers context — the market salience ranking alone decides the story.
+    - region "Market board" [ref=f51e199]:
+      - list [ref=f51e200]:
+        - listitem [ref=f51e201]:
+          - generic [ref=f51e202]:
+            - heading "EUR/USD" [level=3] [ref=f51e203]
+            - button "Add EUR/USD to watchlist" [ref=f51e204] [cursor=pointer]: ☆
+          - generic [ref=f51e205]:
+            - generic [ref=f51e206]: "1.1399"
+            - generic [ref=f51e207]:
+              - text: ▲
+              - generic [ref=f51e208]: up
+              - text: 0.14%
+          - img [ref=f51e210]
+        - listitem [ref=f51e212]:
+          - generic [ref=f51e213]:
+            - heading "Bitcoin" [level=3] [ref=f51e214]
+            - button "Add Bitcoin to watchlist" [ref=f51e215] [cursor=pointer]: ☆
+          - generic [ref=f51e216]:
+            - generic [ref=f51e217]: 61,482
+            - generic [ref=f51e218]:
+              - text: ▲
+              - generic [ref=f51e219]: up
+              - text: 5.01%
+          - img [ref=f51e221]
+        - listitem [ref=f51e223]:
+          - generic [ref=f51e224]:
+            - heading "Ethereum" [level=3] [ref=f51e225]
+            - button "Add Ethereum to watchlist" [ref=f51e226] [cursor=pointer]: ☆
+          - generic [ref=f51e227]:
+            - generic [ref=f51e228]: 1,699
+            - generic [ref=f51e229]:
+              - text: ▲
+              - generic [ref=f51e230]: up
+              - text: 8.19%
+          - img [ref=f51e232]
+        - listitem [ref=f51e234]:
+          - generic [ref=f51e235]:
+            - heading "S&P 500" [level=3] [ref=f51e236]
+            - button "Add S&P 500 to watchlist" [ref=f51e237] [cursor=pointer]: ☆
+          - generic [ref=f51e238]:
+            - generic [ref=f51e239]: 7,483.2
+            - generic [ref=f51e240]:
+              - text: ▲
+              - generic [ref=f51e241]: up
+              - text: 0.00%
+          - img [ref=f51e243]
+        - listitem [ref=f51e245]:
+          - generic [ref=f51e246]:
+            - heading "Nasdaq" [level=3] [ref=f51e247]
+            - button "Add Nasdaq to watchlist" [ref=f51e248] [cursor=pointer]: ☆
+          - generic [ref=f51e249]:
+            - generic [ref=f51e250]: 25,832.7
+            - generic [ref=f51e251]:
+              - text: ▼
+              - generic [ref=f51e252]: down
+              - text: 0.80%
+          - img [ref=f51e254]
+        - listitem [ref=f51e256]:
+          - generic [ref=f51e257]:
+            - heading "Brent Crude" [level=3] [ref=f51e258]
+            - button "Add Brent Crude to watchlist" [ref=f51e259] [cursor=pointer]: ☆
+          - generic [ref=f51e260]:
+            - generic [ref=f51e261]: "71.54"
+            - generic [ref=f51e262]:
+              - text: ▼
+              - generic [ref=f51e263]: down
+              - text: 0.04%
+          - img [ref=f51e265]
+        - listitem [ref=f51e267]:
+          - generic [ref=f51e268]:
+            - heading "Gold" [level=3] [ref=f51e269]
+            - button "Add Gold to watchlist" [ref=f51e270] [cursor=pointer]: ☆
+          - generic [ref=f51e271]:
+            - generic [ref=f51e272]: 4,135.5
+            - generic [ref=f51e273]:
+              - text: ▲
+              - generic [ref=f51e274]: up
+              - text: 1.65%
+          - img [ref=f51e276]
+        - listitem [ref=f51e278]:
+          - generic [ref=f51e279]:
+            - heading "UK 5y Gilt" [level=3] [ref=f51e280]
+            - button "Add UK 5y Gilt to watchlist" [ref=f51e281] [cursor=pointer]: ☆
+          - generic [ref=f51e282]:
+            - generic [ref=f51e283]: 4.28%
+            - generic [ref=f51e284]:
+              - text: ▲
+              - generic [ref=f51e285]: up
+              - text: 3.6bp
+          - img [ref=f51e287]
+        - listitem [ref=f51e289]:
+          - generic [ref=f51e290]:
+            - heading "UK 10y Gilt" [level=3] [ref=f51e291]
+            - button "Add UK 10y Gilt to watchlist" [ref=f51e292] [cursor=pointer]: ☆
+          - generic [ref=f51e293]:
+            - generic [ref=f51e294]: 4.74%
+            - generic [ref=f51e295]:
+              - text: ▲
+              - generic [ref=f51e296]: up
+              - text: 4.2bp
+          - img [ref=f51e298]
+        - listitem [ref=f51e300]:
+          - generic [ref=f51e301]:
+            - heading "US 2y Treasury" [level=3] [ref=f51e302]
+            - button "Add US 2y Treasury to watchlist" [ref=f51e303] [cursor=pointer]: ☆
+          - generic [ref=f51e304]:
+            - generic [ref=f51e305]: 4.17%
+            - generic [ref=f51e306]:
+              - text: ▲
+              - generic [ref=f51e307]: up
+              - text: 3.0bp
+          - img [ref=f51e309]
+        - listitem [ref=f51e311]:
+          - generic [ref=f51e312]:
+            - heading "US 10y Treasury" [level=3] [ref=f51e313]
+            - button "Add US 10y Treasury to watchlist" [ref=f51e314] [cursor=pointer]: ☆
+          - generic [ref=f51e315]:
+            - generic [ref=f51e316]: 4.48%
+            - generic [ref=f51e317]:
+              - text: ▲
+              - generic [ref=f51e318]: up
+              - text: 4.0bp
+          - img [ref=f51e320]
+    - generic [ref=f51e322]:
+      - region "UK gilt curve against one month and one year ago" [ref=f51e323]:
+        - generic [ref=f51e324]:
+          - heading "The UK gilt curve" [level=3] [ref=f51e325]
+          - generic [ref=f51e326]: Bank of England IADB
+        - img "5 year 4.28%, 10 year 4.74%, 20 year 5.26%" [ref=f51e327]:
+          - generic [ref=f51e334]: 10Y +4bp today
+          - generic [ref=f51e335]:
+            - generic [ref=f51e336]: 5Y
+            - generic [ref=f51e337]: 10Y
+            - generic [ref=f51e338]: 20Y
+        - generic [ref=f51e341]:
+          - generic [ref=f51e342]: Today
+          - generic [ref=f51e344]: One month ago
+          - generic [ref=f51e346]: One year ago
+        - generic [ref=f51e348]:
+          - generic [ref=f51e349]:
+            - generic [ref=f51e350]: 5s10s spread
+            - generic [ref=f51e351]: +46bp
+          - generic [ref=f51e352]:
+            - generic [ref=f51e353]: Change today
+            - generic [ref=f51e354]: +1bp steeper
+          - generic [ref=f51e355]:
+            - generic [ref=f51e356]: Recession signal
+            - generic [ref=f51e357]: Not inverted
+        - paragraph [ref=f51e358]: Nominal par yields · no 2Y IADB series — curve starts at 5Y · as of 2026-06-30 · fetched 22:48
+      - region "Central bank watch" [ref=f51e359]:
+        - generic [ref=f51e360]:
+          - heading "Central bank watch" [level=3] [ref=f51e361]
+          - generic [ref=f51e362]: next decisions
+        - generic [ref=f51e363]:
+          - generic [ref=f51e364]:
+            - generic [ref=f51e365]: Bank of England
+            - generic [ref=f51e366]: "Last: -25bp on 18 Dec"
+          - generic [ref=f51e367]:
+            - generic [ref=f51e368]: 3.75%
+            - generic [ref=f51e369]: MPC in 28 days
+        - generic [ref=f51e370]:
+          - generic [ref=f51e371]:
+            - generic [ref=f51e372]: Federal Reserve
+            - generic [ref=f51e373]: "Last: -25bp on 11 Dec"
+          - generic [ref=f51e374]:
+            - generic [ref=f51e375]: 3.75%
+            - generic [ref=f51e376]: FOMC in 27 days
+        - generic [ref=f51e377]:
+          - generic [ref=f51e378]:
+            - generic [ref=f51e379]: European Central Bank
+            - generic [ref=f51e380]: "Last: +25bp on 17 Jun"
+          - generic [ref=f51e381]:
+            - generic [ref=f51e382]: 2.25%
+            - generic [ref=f51e383]: Governing Council in 21 days
+        - paragraph [ref=f51e384]: "Rates: Bank of England IADB · FRED · ECB Data Portal. Meeting dates from each institution’s published calendar. Vote splits and the market-implied path are future work."
+    - generic [ref=f51e385]:
+      - region "The economic diary" [ref=f51e386]:
+        - generic [ref=f51e387]:
+          - heading "The economic diary" [level=3] [ref=f51e388]
+          - link "full diary →" [ref=f51e389] [cursor=pointer]:
+            - /url: /diary
+        - table [ref=f51e390]:
+          - rowgroup [ref=f51e391]:
+            - row "Date Release Prior Exp. Result" [ref=f51e392]:
+              - columnheader "Date" [ref=f51e393]
+              - columnheader "Release" [ref=f51e394]
+              - columnheader "Prior" [ref=f51e395]
+              - columnheader "Exp." [ref=f51e396]
+              - columnheader "Result" [ref=f51e397]
+          - rowgroup [ref=f51e398]:
+            - row "2 Jul USUS Employment Situation, June (non-farm payrolls) — — +57k · u/e 4.2%" [ref=f51e399]:
+              - cell "2 Jul" [ref=f51e400]
+              - cell "USUS Employment Situation, June (non-farm payrolls)" [ref=f51e401]
+              - cell "—" [ref=f51e402]
+              - cell "—" [ref=f51e403]
+              - cell "+57k · u/e 4.2%" [ref=f51e404]:
+                - generic [ref=f51e405]: +57k · u/e 4.2%
+            - row "14 Jul USUS CPI, June (y/y) 4.2% — 13:30" [ref=f51e406]:
+              - cell "14 Jul" [ref=f51e407]
+              - cell "USUS CPI, June (y/y)" [ref=f51e408]
+              - cell "4.2%" [ref=f51e409]
+              - cell "—" [ref=f51e410]
+              - cell "13:30" [ref=f51e411]:
+                - generic [ref=f51e412]: 13:30
+            - row "22 Jul UKUK consumer price inflation, June (y/y) 2.8% — 07:00" [ref=f51e413]:
+              - cell "22 Jul" [ref=f51e414]
+              - cell "UKUK consumer price inflation, June (y/y)" [ref=f51e415]
+              - cell "2.8%" [ref=f51e416]
+              - cell "—" [ref=f51e417]
+              - cell "07:00" [ref=f51e418]:
+                - generic [ref=f51e419]: 07:00
+            - row "23 Jul EAECB policy decision (deposit rate) 2.25% — 13:15" [ref=f51e420]:
+              - cell "23 Jul" [ref=f51e421]
+              - cell "EAECB policy decision (deposit rate)" [ref=f51e422]
+              - cell "2.25%" [ref=f51e423]
+              - cell "—" [ref=f51e424]
+              - cell "13:15" [ref=f51e425]:
+                - generic [ref=f51e426]: 13:15
+            - row "29 Jul USUS FOMC policy decision (target upper) 3.75% — 19:00" [ref=f51e427]:
+              - cell "29 Jul" [ref=f51e428]
+              - cell "USUS FOMC policy decision (target upper)" [ref=f51e429]
+              - cell "3.75%" [ref=f51e430]
+              - cell "—" [ref=f51e431]
+              - cell "19:00" [ref=f51e432]:
+                - generic [ref=f51e433]: 19:00
+        - paragraph [ref=f51e434]: Schedule curated 2026-07-02 from ONS, BLS and central-bank calendars; priors from the official releases. Consensus (Exp.) is commercial data — shown only when publicly citable, else surprise direction scores against the prior print. The surprise index begins once releases print against recorded priors.
+      - generic [ref=f51e435]:
+        - generic [ref=f51e436]:
+          - generic [ref=f51e437]: This day in economic history
+          - generic [ref=f51e438]: 2 July 1997
+          - paragraph [ref=f51e439]: Thailand floats the baht after exhausting its reserves defending the peg — the spark of the Asian Financial Crisis.
+        - generic [ref=f51e440]:
+          - generic [ref=f51e441]: Concept of the day · Learn mode
+          - heading "curve inversion" [level=4] [ref=f51e442]
+          - paragraph [ref=f51e443]: When short-dated yields sit above long-dated ones — lenders are paid more for two years than ten. It signals that policy is tight relative to expected growth.
+          - paragraph [ref=f51e444]:
+            - text: "Why it matters: Inversions have preceded every US recession of the past half-century, with long and variable lags."
+            - link "Learn mode →" [ref=f51e445] [cursor=pointer]:
+              - /url: /learn
+    - region "The archive" [ref=f51e446]:
+      - generic [ref=f51e447]:
+        - heading "The archive" [level=3] [ref=f51e448]
+        - generic [ref=f51e449]:
+          - text: last 30 sessions · click to replay ·
+          - link "⚑ full archive" [ref=f51e450] [cursor=pointer]:
+            - /url: /archive
+      - generic [ref=f51e451]:
+        - generic "No edition for this date" [ref=f51e452]:
+          - generic [ref=f51e453]: "3"
+        - generic "No edition for this date" [ref=f51e454]:
+          - generic [ref=f51e455]: "4"
+        - generic "No edition for this date" [ref=f51e456]:
+          - generic [ref=f51e457]: "5"
+        - generic "No edition for this date" [ref=f51e458]:
+          - generic [ref=f51e459]: "6"
+        - generic "No edition for this date" [ref=f51e460]:
+          - generic [ref=f51e461]: "7"
+        - generic "No edition for this date" [ref=f51e462]:
+          - generic [ref=f51e463]: "8"
+        - generic "No edition for this date" [ref=f51e464]:
+          - generic [ref=f51e465]: "9"
+        - generic "No edition for this date" [ref=f51e466]:
+          - generic [ref=f51e467]: "10"
+        - generic "No edition for this date" [ref=f51e468]:
+          - generic [ref=f51e469]: "11"
+        - generic "No edition for this date" [ref=f51e470]:
+          - generic [ref=f51e471]: "12"
+        - generic "No edition for this date" [ref=f51e472]:
+          - generic [ref=f51e473]: "13"
+        - generic "No edition for this date" [ref=f51e474]:
+          - generic [ref=f51e475]: "14"
+        - generic "No edition for this date" [ref=f51e476]:
+          - generic [ref=f51e477]: "15"
+        - generic "No edition for this date" [ref=f51e478]:
+          - generic [ref=f51e479]: "16"
+        - generic "No edition for this date" [ref=f51e480]:
+          - generic [ref=f51e481]: "17"
+        - generic "No edition for this date" [ref=f51e482]:
+          - generic [ref=f51e483]: "18"
+        - generic "No edition for this date" [ref=f51e484]:
+          - generic [ref=f51e485]: "19"
+        - generic "No edition for this date" [ref=f51e486]:
+          - generic [ref=f51e487]: "20"
+        - generic "No edition for this date" [ref=f51e488]:
+          - generic [ref=f51e489]: "21"
+        - generic "No edition for this date" [ref=f51e490]:
+          - generic [ref=f51e491]: "22"
+        - generic "No edition for this date" [ref=f51e492]:
+          - generic [ref=f51e493]: "23"
+        - generic "No edition for this date" [ref=f51e494]:
+          - generic [ref=f51e495]: "24"
+        - generic "No edition for this date" [ref=f51e496]:
+          - generic [ref=f51e497]: "25"
+        - generic "No edition for this date" [ref=f51e498]:
+          - generic [ref=f51e499]: "26"
+        - generic "No edition for this date" [ref=f51e500]:
+          - generic [ref=f51e501]: "27"
+        - generic "No edition for this date" [ref=f51e502]:
+          - generic [ref=f51e503]: "28"
+        - generic "No edition for this date" [ref=f51e504]:
+          - generic [ref=f51e505]: "29"
+        - generic "No edition for this date" [ref=f51e506]:
+          - generic [ref=f51e507]: "30"
+        - generic "No edition for this date" [ref=f51e508]:
+          - generic [ref=f51e509]: "1"
+        - link "Medallion 2" [ref=f51e510] [cursor=pointer]:
+          - /url: /archive/2026-07-02
+          - img "Medallion" [ref=f51e511]
+          - generic [ref=f51e540]: "2"
+    - generic [ref=f51e541]:
+      - generic [ref=f51e542]: "Sources: Frankfurter (ECB reference rates) · CoinGecko · Yahoo Finance · Bank of England IADB · FRED (St. Louis Fed) · ECB Data Portal"
+      - generic [ref=f51e543]:
+        - text: Edition
+        - generic [ref=f51e544]: Nº 1
+        - text: · Fetched 2 Jul, 22:48 UTC · Informational only — not investment advice
+  - button "Open Next.js Dev Tools" [ref=f51e550] [cursor=pointer]:
+    - img [ref=f51e551]

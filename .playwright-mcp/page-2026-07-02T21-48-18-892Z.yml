@@ -1,0 +1,144 @@
+- generic [active] [ref=f50e1]:
+  - banner [ref=f50e2]:
+    - generic [ref=f50e3]:
+      - paragraph [ref=f50e4]: Stirling.
+      - navigation "Primary" [ref=f50e5]:
+        - link "Today" [ref=f50e6] [cursor=pointer]:
+          - /url: /
+        - link "Archive" [ref=f50e7] [cursor=pointer]:
+          - /url: /archive
+        - link "Curve" [ref=f50e8] [cursor=pointer]:
+          - /url: /curve
+        - link "Diary" [ref=f50e9] [cursor=pointer]:
+          - /url: /diary
+        - link "Learn" [ref=f50e10] [cursor=pointer]:
+          - /url: /learn
+      - generic [ref=f50e11]:
+        - time [ref=f50e12]: Thu, 2 Jul 2026 · 22:48
+        - button "Learn off" [ref=f50e14] [cursor=pointer]
+        - generic "Clear · risk-on" [ref=f50e15]:
+          - img "Medallion" [ref=f50e16]
+          - generic [ref=f50e46]:
+            - generic [ref=f50e47]: CLEAR
+            - generic [ref=f50e48]: risk-on
+        - button "Issue today’s report" [ref=f50e49] [cursor=pointer]
+  - dialog [ref=f50e50]:
+    - generic [ref=f50e51]:
+      - generic [ref=f50e52]:
+        - generic [ref=f50e53]: The daily briefing · Desk note
+        - heading [level=2] [ref=f50e54]: USD/JPY slumps 0.69% as FTSE 100 surges 1.67%
+        - generic [ref=f50e55]: Thursday, 2 July 2026 · Edition Nº 1 · Clear
+      - img [ref=f50e57]
+      - button [ref=f50e86] [cursor=pointer]: ✕
+    - generic [ref=f50e87]:
+      - tablist [ref=f50e88]:
+        - tab [selected] [ref=f50e89] [cursor=pointer]: Desk note
+        - tab [ref=f50e90] [cursor=pointer]: Plain English
+        - tab [ref=f50e91] [cursor=pointer]: Study mode
+        - tab [ref=f50e92] [cursor=pointer]: Template
+      - generic [ref=f50e93]:
+        - generic [ref=f50e94]: USD/JPY ▼ 0.69%
+        - generic [ref=f50e95]: FTSE 100 ▲ 1.67%
+        - generic [ref=f50e96]: EUR/GBP ▼ 0.36%
+        - generic [ref=f50e97]: US 30y Treasury ▲ 6.0bp
+      - paragraph [ref=f50e98]: USD/JPY saw the most significant move, declining by 0.69% on the day, a 5.3σ event against its trailing month. This was the most unusual print across the board. The FTSE 100 also posted a notable gain, rising 1.67% (2.9σ).
+      - paragraph [ref=f50e99]: EUR/GBP followed with a 0.36% decline, representing a 2.4σ move. Elsewhere, US 30y Treasury yields increased by 0.06%, while UK 20y Gilt yields rose by 0.05%.
+      - paragraph [ref=f50e100]: Cryptocurrencies also saw strong performance, with Ethereum up 8.50% and Bitcoin gaining 5.08%. GBP/USD strengthened by 0.50%.
+      - generic [ref=f50e101]:
+        - generic [ref=f50e102]: What to watch tomorrow
+        - list [ref=f50e103]:
+          - listitem [ref=f50e104]: The ongoing geopolitical situation following reports of a "most massive" Russian attack on Kyiv.
+          - listitem [ref=f50e105]: Any further statements from the Federal Reserve Board regarding enforcement actions, after today's announcements concerning Small Business Bank and others.
+          - listitem [ref=f50e106]: Developments related to the ECB's focus on the digital transformation of money, payments, and finance, as discussed by Piero Cipollone.
+      - generic [ref=f50e107]: AI-generated · every figure from the day's snapshot
+  - main [ref=f50e108]:
+    - generic [ref=f50e109]:
+      - paragraph [ref=f50e110]: Releases & decisions
+      - heading "The diary" [level=1] [ref=f50e112]
+      - paragraph [ref=f50e113]: "The scheduled prints that move the board: UK, US and euro-area releases with central bank decision days. Dates come from the official calendars; consensus figures are commercial data and are omitted rather than guessed."
+    - generic [ref=f50e114]:
+      - region "The economic diary" [ref=f50e115]:
+        - generic [ref=f50e116]:
+          - heading "The economic diary" [level=3] [ref=f50e117]
+          - link "full diary →" [ref=f50e118] [cursor=pointer]:
+            - /url: /diary
+        - table [ref=f50e119]:
+          - rowgroup [ref=f50e120]:
+            - row "Date Release Prior Exp. Result" [ref=f50e121]:
+              - columnheader "Date" [ref=f50e122]
+              - columnheader "Release" [ref=f50e123]
+              - columnheader "Prior" [ref=f50e124]
+              - columnheader "Exp." [ref=f50e125]
+              - columnheader "Result" [ref=f50e126]
+          - rowgroup [ref=f50e127]:
+            - row "2 Jul USUS Employment Situation, June (non-farm payrolls) — — +57k · u/e 4.2%" [ref=f50e128]:
+              - cell "2 Jul" [ref=f50e129]
+              - cell "USUS Employment Situation, June (non-farm payrolls)" [ref=f50e130]
+              - cell "—" [ref=f50e131]
+              - cell "—" [ref=f50e132]
+              - cell "+57k · u/e 4.2%" [ref=f50e133]:
+                - generic [ref=f50e134]: +57k · u/e 4.2%
+            - row "14 Jul USUS CPI, June (y/y) 4.2% — 13:30" [ref=f50e135]:
+              - cell "14 Jul" [ref=f50e136]
+              - cell "USUS CPI, June (y/y)" [ref=f50e137]
+              - cell "4.2%" [ref=f50e138]
+              - cell "—" [ref=f50e139]
+              - cell "13:30" [ref=f50e140]:
+                - generic [ref=f50e141]: 13:30
+            - row "22 Jul UKUK consumer price inflation, June (y/y) 2.8% — 07:00" [ref=f50e142]:
+              - cell "22 Jul" [ref=f50e143]
+              - cell "UKUK consumer price inflation, June (y/y)" [ref=f50e144]
+              - cell "2.8%" [ref=f50e145]
+              - cell "—" [ref=f50e146]
+              - cell "07:00" [ref=f50e147]:
+                - generic [ref=f50e148]: 07:00
+            - row "23 Jul EAECB policy decision (deposit rate) 2.25% — 13:15" [ref=f50e149]:
+              - cell "23 Jul" [ref=f50e150]
+              - cell "EAECB policy decision (deposit rate)" [ref=f50e151]
+              - cell "2.25%" [ref=f50e152]
+              - cell "—" [ref=f50e153]
+              - cell "13:15" [ref=f50e154]:
+                - generic [ref=f50e155]: 13:15
+            - row "29 Jul USUS FOMC policy decision (target upper) 3.75% — 19:00" [ref=f50e156]:
+              - cell "29 Jul" [ref=f50e157]
+              - cell "USUS FOMC policy decision (target upper)" [ref=f50e158]
+              - cell "3.75%" [ref=f50e159]
+              - cell "—" [ref=f50e160]
+              - cell "19:00" [ref=f50e161]:
+                - generic [ref=f50e162]: 19:00
+            - row "30 Jul UKUK MPC policy decision (Bank Rate) 3.75% — 12:00" [ref=f50e163]:
+              - cell "30 Jul" [ref=f50e164]
+              - cell "UKUK MPC policy decision (Bank Rate)" [ref=f50e165]
+              - cell "3.75%" [ref=f50e166]
+              - cell "—" [ref=f50e167]
+              - cell "12:00" [ref=f50e168]:
+                - generic [ref=f50e169]: 12:00
+        - paragraph [ref=f50e170]: Schedule curated 2026-07-02 from ONS, BLS and central-bank calendars; priors from the official releases. Consensus (Exp.) is commercial data — shown only when publicly citable, else surprise direction scores against the prior print. The surprise index begins once releases print against recorded priors.
+      - region "Central bank watch" [ref=f50e171]:
+        - generic [ref=f50e172]:
+          - heading "Central bank watch" [level=3] [ref=f50e173]
+          - generic [ref=f50e174]: next decisions
+        - generic [ref=f50e175]:
+          - generic [ref=f50e176]:
+            - generic [ref=f50e177]: Bank of England
+            - generic [ref=f50e178]: "Last: -25bp on 18 Dec"
+          - generic [ref=f50e179]:
+            - generic [ref=f50e180]: 3.75%
+            - generic [ref=f50e181]: MPC in 28 days
+        - generic [ref=f50e182]:
+          - generic [ref=f50e183]:
+            - generic [ref=f50e184]: Federal Reserve
+            - generic [ref=f50e185]: "Last: -25bp on 11 Dec"
+          - generic [ref=f50e186]:
+            - generic [ref=f50e187]: 3.75%
+            - generic [ref=f50e188]: FOMC in 27 days
+        - generic [ref=f50e189]:
+          - generic [ref=f50e190]:
+            - generic [ref=f50e191]: European Central Bank
+            - generic [ref=f50e192]: "Last: +25bp on 17 Jun"
+          - generic [ref=f50e193]:
+            - generic [ref=f50e194]: 2.25%
+            - generic [ref=f50e195]: Governing Council in 21 days
+        - paragraph [ref=f50e196]: "Rates: Bank of England IADB · FRED · ECB Data Portal. Meeting dates from each institution’s published calendar. Vote splits and the market-implied path are future work."
+  - button "Open Next.js Dev Tools" [ref=f50e202] [cursor=pointer]:
+    - img [ref=f50e203]

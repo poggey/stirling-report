@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Archivo, Archivo_Narrow } from "next/font/google";
+import { LearnProvider } from "@/components/learn/LearnProvider";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -38,7 +39,9 @@ export default function RootLayout({
       lang="en-GB"
       className={`${fraunces.variable} ${archivo.variable} ${archivoNarrow.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <LearnProvider>{children}</LearnProvider>
+      </body>
     </html>
   );
 }

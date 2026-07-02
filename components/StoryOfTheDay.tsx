@@ -1,3 +1,4 @@
+import { Chipped } from "./learn/LearnProvider";
 import type { Story } from "@/lib/story";
 
 interface StoryOfTheDayProps {
@@ -49,7 +50,7 @@ export function StoryOfTheDay({
       </h1>
 
       <p className="mt-[18px] max-w-[58ch] text-base text-[#42504A]">
-        {story.standfirst}
+        <Chipped text={story.standfirst} />
       </p>
 
       <dl className="mt-[22px] flex flex-wrap gap-x-[22px] gap-y-1 border-t border-line pt-4 text-xs text-muted">

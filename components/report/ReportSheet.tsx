@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { Chipped } from "@/components/learn/LearnProvider";
 import { Medallion } from "@/components/Medallion";
 import { parseBriefing } from "@/lib/briefing/template";
 import type { Briefings } from "@/lib/editions/types";
@@ -164,7 +165,7 @@ export function ReportSheet({ payload }: { payload: ReportPayload }) {
 
           {paragraphs.map((p) => (
             <p key={p.slice(0, 40)} className="mb-3.5 text-[15px] leading-[1.7] text-[#2A3830]">
-              {p}
+              <Chipped text={p} />
             </p>
           ))}
 

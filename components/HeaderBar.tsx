@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LearnToggle } from "./learn/LearnProvider";
 import { Medallion } from "./Medallion";
 import { formatShortDateTime } from "@/lib/format";
 
@@ -7,7 +8,7 @@ const NAV: { label: string; href?: string }[] = [
   { label: "Archive", href: "/archive" },
   { label: "Curve", href: "/curve" },
   { label: "Diary", href: "/diary" },
-  { label: "Learn" },
+  { label: "Learn", href: "/learn" },
 ];
 
 interface HeaderBarProps {
@@ -65,6 +66,10 @@ export function HeaderBar({ weather, weatherSub, petals, storm, date, issueSlot 
           >
             {formatShortDateTime(date)}
           </time>
+
+          <span className="hidden sm:block">
+            <LearnToggle />
+          </span>
 
           <span className="flex items-center gap-2 rounded-full border border-line bg-ivory-1 py-1.5 pl-2 pr-3.5">
             <Medallion petals={petals} storm={storm} size={22} />

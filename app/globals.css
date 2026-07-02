@@ -82,10 +82,15 @@
   }
 }
 
-/* Print: the report sheet becomes the page (WHITEPAPER §9.2) */
+/* Print: when the report sheet is open, it becomes the page (WHITEPAPER §9.2).
+   With the sheet closed, pages print normally (the Last-30-Days one-pager). */
 @media print {
-  body * {
+  body:has(#report-sheet[aria-hidden="false"]) * {
     visibility: hidden;
+  }
+  body:has(#report-sheet[aria-hidden="false"]) #report-sheet,
+  body:has(#report-sheet[aria-hidden="false"]) #report-sheet * {
+    visibility: visible;
   }
   #report-sheet,
   #report-sheet * {

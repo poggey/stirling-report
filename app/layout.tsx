@@ -45,6 +45,12 @@ export default function RootLayout({
           <SiteChrome />
           {children}
         </LearnProvider>
+        <script
+          src="https://cdn.jsdelivr.net/gh/poggey/built-by@main/built-by.js"
+          data-name="Padraig Middleton"
+          data-github="https://github.com/poggey"
+          defer
+        />
       </body>
     </html>
   );
